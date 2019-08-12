@@ -1,7 +1,8 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'dart:async';
+import 'package:news_app/widgets/BackIcon.dart';
+import 'package:news_app/widgets/CountDownTextRoute.dart';
 
 void main() {
   runApp(MaterialApp(color: Colors.white, home: RegisterPage()));
@@ -21,8 +22,8 @@ class RegisterPage extends StatelessWidget {
             children: <Widget>[
               Container(
                 alignment: Alignment.topLeft,
-                margin: EdgeInsets.only(left: 30, top: 50),
-                child: Icon(Icons.arrow_back_ios, color: Colors.black),
+                margin: EdgeInsets.only(left: 10, top: 50),
+                child: BackIcon(),
               ),
               Container(
                   margin: EdgeInsets.only(left: 40, top: 50, bottom: 80),
@@ -142,49 +143,7 @@ class RegisterPage extends StatelessWidget {
   }
 }
 
-class CountDownTextRoute extends StatefulWidget {
-  CountDownTextRoute({Key key}) : super(key: key);
 
-  _CountDownTextRouteState createState() => _CountDownTextRouteState();
-}
-
-class _CountDownTextRouteState extends State<CountDownTextRoute> {
-  var _countdownTime = 0;
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: GestureDetector(
-        child: Text(_countdownTime > 0 ? '$_countdownTime后重新获取' : '获取验证码',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold,color: _countdownTime > 0
-          ? Color.fromARGB(255, 183, 184, 195)
-          : Color.fromARGB(255, 17, 132, 255))),
-        onTap: (){
-          if(_countdownTime == 0){
-            setState(() {
-              _countdownTime = 60;
-            });
-            _startCountDown();
-          }
-        },
-      ),
-    );
-  }
-
-  _startCountDown() {
-    var oneSec = Duration(seconds: 1);
-    Timer _timer;
-    var callback = (timer) {
-      setState(() {
-        if (_countdownTime < 1) {
-          _timer.cancel();
-        } else {
-          _countdownTime = _countdownTime - 1;
-        }
-      });
-    };
-    _timer = Timer.periodic(oneSec, callback);
-  }
-}
 
 class SwitchAndCheckBoxTestRoute extends StatefulWidget {
   @override
@@ -203,15 +162,49 @@ class _SwitchAndCheckBoxTestRouteState
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Checkbox(
-            value: _checkBoxSelected,
-            onChanged: (value) {
-              setState(() {
-                _checkBoxSelected = value;
-              });
-            },
+          Container(
+            width: 20,
+            height: 35,
+            margin: EdgeInsets.all(10),
+            child:  Checkbox(
+              value: _checkBoxSelected,
+              activeColor: Color(0xFF02AF8A),
+              onChanged: (value) {
+                setState(() {
+                  _checkBoxSelected = value;
+                });
+              },
+            ),
           ),
-          Text("我已阅读并同意某某的《用户协议》与《 隐私政策》")
+
+          Text.rich(
+            new TextSpan(
+                text: '我已阅读并同意某某的',
+                style: new TextStyle(
+                    color: Color(0xFF999999),
+                    fontSize: 13,
+                    decoration: TextDecoration.none),
+                children: <TextSpan>[
+                  new TextSpan(
+                      text: '《用户协议》',
+                      style: new TextStyle(
+                          color: Color(0xFFD91A00),
+                          fontSize: 13,
+                          decoration: TextDecoration.none)),
+                  new TextSpan(
+                      text: '与',
+                      style: new TextStyle(
+                          color: Color(0xFF999999),
+                          fontSize: 15,
+                          decoration: TextDecoration.none)),
+                  new TextSpan(
+                      text: '《 隐私政策》',
+                      style: new TextStyle(
+                          color: Color(0xFFD91A00),
+                          fontSize: 13,
+                          decoration: TextDecoration.none)),
+                ]),
+          ),
         ],
       ),
     );

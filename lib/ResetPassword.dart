@@ -1,6 +1,8 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:news_app/widgets/BackIcon.dart';
+import 'package:news_app/widgets/CountDownTextRoute.dart';
 
 void main() {
   runApp(MaterialApp(color: Colors.white, home: ResetPassword()));
@@ -20,8 +22,8 @@ class ResetPassword extends StatelessWidget {
             children: <Widget>[
               Container(
                 alignment: Alignment.topLeft,
-                margin: EdgeInsets.only(left: 30, top: 50),
-                child: Icon(Icons.arrow_back_ios, color: Colors.black),
+                margin: EdgeInsets.only(left: 10, top: 50),
+                child: BackIcon(),
               ),
               Container(
                   margin: EdgeInsets.only(left: 40, top: 50, bottom: 80),
@@ -70,11 +72,7 @@ class ResetPassword extends StatelessWidget {
                         autofocus: false,
                       ),
                     ),
-                    Text(
-                      "获取验证码",
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                    )
+                    CountDownTextRoute()
                   ],
                 ),
               ),
@@ -144,34 +142,3 @@ class ResetPassword extends StatelessWidget {
   }
 }
 
-class SwitchAndCheckBoxTestRoute extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    return _SwitchAndCheckBoxTestRouteState();
-  }
-}
-
-class _SwitchAndCheckBoxTestRouteState
-    extends State<SwitchAndCheckBoxTestRoute> {
-  var _checkBoxSelected = false;
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Checkbox(
-            value: _checkBoxSelected,
-            onChanged: (value) {
-              setState(() {
-                _checkBoxSelected = value;
-              });
-            },
-          ),
-          Text("我已阅读并同意某某的《用户协议》与《 隐私政策》")
-        ],
-      ),
-    );
-  }
-}
