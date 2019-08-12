@@ -1,13 +1,12 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'dart:async';
 
 void main() {
-  runApp(MaterialApp(color: Colors.white, home: RegisterPage()));
+  runApp(MaterialApp(color: Colors.white, home: ResetPassword()));
 }
 
-class RegisterPage extends StatelessWidget {
+class ResetPassword extends StatelessWidget {
   var phoneNumber;
   var userPassword;
 
@@ -28,7 +27,7 @@ class RegisterPage extends StatelessWidget {
                   margin: EdgeInsets.only(left: 40, top: 50, bottom: 80),
                   alignment: Alignment.topLeft,
                   child: Text(
-                    "注册",
+                    "重置密码",
                     style: TextStyle(
                         fontSize: 35,
                         fontWeight: FontWeight.bold,
@@ -71,7 +70,11 @@ class RegisterPage extends StatelessWidget {
                         autofocus: false,
                       ),
                     ),
-                    CountDownTextRoute()
+                    Text(
+                      "获取验证码",
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    )
                   ],
                 ),
               ),
@@ -113,7 +116,6 @@ class RegisterPage extends StatelessWidget {
                   splashColor: Color(0xFF02AF8A),
                 ),
               ),
-              SwitchAndCheckBoxTestRoute(),
             ],
           )),
     )));
@@ -139,50 +141,6 @@ class RegisterPage extends StatelessWidget {
 
   _showToast(BuildContext context, String msg) {
     Scaffold.of(context).showSnackBar(SnackBar(content: Text("${msg}")));
-  }
-}
-
-class CountDownTextRoute extends StatefulWidget {
-  CountDownTextRoute({Key key}) : super(key: key);
-
-  _CountDownTextRouteState createState() => _CountDownTextRouteState();
-}
-
-class _CountDownTextRouteState extends State<CountDownTextRoute> {
-  var _countdownTime = 0;
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: GestureDetector(
-        child: Text(_countdownTime > 0 ? '$_countdownTime后重新获取' : '获取验证码',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold,color: _countdownTime > 0
-          ? Color.fromARGB(255, 183, 184, 195)
-          : Color.fromARGB(255, 17, 132, 255))),
-        onTap: (){
-          if(_countdownTime == 0){
-            setState(() {
-              _countdownTime = 60;
-            });
-            _startCountDown();
-          }
-        },
-      ),
-    );
-  }
-
-  _startCountDown() {
-    var oneSec = Duration(seconds: 1);
-    Timer _timer;
-    var callback = (timer) {
-      setState(() {
-        if (_countdownTime < 1) {
-          _timer.cancel();
-        } else {
-          _countdownTime = _countdownTime - 1;
-        }
-      });
-    };
-    _timer = Timer.periodic(oneSec, callback);
   }
 }
 

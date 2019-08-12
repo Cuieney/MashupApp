@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:news_app/ResetPassword.dart';
 
 import 'Register.dart';
 
@@ -9,7 +10,8 @@ void main() {
     home: LoginPage(),
     color: Colors.white,
     routes: {
-      "register":(context)=>RegisterPage()
+      "register": (context) => RegisterPage(),
+      "reset": (context) => ResetPassword()
     },
   ));
 }
@@ -21,7 +23,9 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(child: Container(child:Column(
+        body: SingleChildScrollView(
+      child: Container(
+          child: Column(
         children: <Widget>[
           Container(
               margin: EdgeInsets.only(left: 40, top: 113, bottom: 80),
@@ -77,15 +81,15 @@ class LoginPage extends StatelessWidget {
               margin: EdgeInsets.fromLTRB(30, 0, 30, 0),
               child: Builder(
                 builder: (context) => RaisedButton(
-                  child: Text(
-                    "登录",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  onPressed: () => _onLogin(context),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(50)),
-                  splashColor: Color(0xFF02AF8A),
-                ),
+                      child: Text(
+                        "登录",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      onPressed: () => _onLogin(context),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50)),
+                      splashColor: Color(0xFF02AF8A),
+                    ),
               ))
         ],
       )),
@@ -125,7 +129,7 @@ class RowLayout extends StatelessWidget {
             margin: EdgeInsets.all(30),
             child: GestureDetector(
               child: Text("注册", style: TextStyle(fontWeight: FontWeight.bold)),
-              onTap: ()=>Navigator.pushNamed(context, "register"),
+              onTap: () => Navigator.pushNamed(context, "register"),
             )),
         Expanded(
             child: Container(
@@ -136,22 +140,10 @@ class RowLayout extends StatelessWidget {
                     "忘记密码",
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
-                  onTap: _goToResetPassword,
+                  onTap: () => Navigator.pushNamed(context, "reset"),
                 ))),
       ],
     );
   }
+}
 
-  _goToResetPassword() {
-    log("go to reset password");
-  }
-}
-class hhhh extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text("ssss"),),
-      body: Text("Sss"),
-    );
-  }
-}
