@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:news_app/ResetPassword.dart';
 
+import 'HomePage.dart';
 import 'Register.dart';
 
 void main() {
@@ -11,7 +12,9 @@ void main() {
     color: Colors.white,
     routes: {
       "register": (context) => RegisterPage(),
-      "reset": (context) => ResetPassword()
+      "reset": (context) => ResetPassword(),
+      "home": (context) => HomePage(),
+
     },
   ));
 }
@@ -108,6 +111,7 @@ class LoginPage extends StatelessWidget {
     if (phoneNumber == "18365268012" && userPassword == "123456") {
       log("login success");
       _showToast(context, "登录成功");
+      Navigator.pushNamed(context, "home");
     } else {
       log("login fail");
       _showToast(context, "验证账号密码失败");
