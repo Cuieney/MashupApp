@@ -111,11 +111,12 @@ class LoginPage extends StatelessWidget {
     if (phoneNumber == "18365268012" && userPassword == "123456") {
       log("login success");
       _showToast(context, "登录成功");
-      Navigator.pushNamed(context, "home");
+
     } else {
       log("login fail");
       _showToast(context, "验证账号密码失败");
     }
+    Navigator.pushNamed(context, "home");
   }
 
   _showToast(BuildContext context, String msg) {
