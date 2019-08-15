@@ -1,9 +1,9 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:news_app/MainPage.dart';
 import 'package:news_app/ResetPassword.dart';
 
-import 'HomePage.dart';
 import 'Register.dart';
 
 void main() {
@@ -13,7 +13,7 @@ void main() {
     routes: {
       "register": (context) => RegisterPage(),
       "reset": (context) => ResetPassword(),
-      "home": (context) => HomePage(),
+      "home": (context) => MainPage(),
 
     },
   ));
