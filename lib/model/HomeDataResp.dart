@@ -11,12 +11,12 @@ class HomeDataResp{
   String from;
   String desc;
   int like;
-  int commit;
+  int comment;
   int repost;
   int collect;
 
   HomeDataResp({this.url, this.headUrl, this.userName, this.time, this.title,
-    this.from, this.desc, this.like, this.commit, this.repost, this.collect});
+    this.from, this.desc, this.like, this.comment, this.repost, this.collect});
 
 
 
@@ -30,7 +30,7 @@ class HomeDataResp{
         from: json['from'] as String,
         desc: json['desc'] as String,
         like: json['like'] as int,
-        commit: json['commit'] as int,
+        comment: json['comment'] as int,
         repost: json['repost'] as int,
         collect: json['collect'] as int);
   }
@@ -45,7 +45,7 @@ class HomeDataResp{
         'from': instance.from,
         'desc': instance.desc,
         'like': instance.like,
-        'commit': instance.commit,
+        'comment': instance.comment,
         'repost': instance.repost,
         'collect': instance.collect
       };

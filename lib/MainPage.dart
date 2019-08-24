@@ -35,12 +35,13 @@ class _MainPageState extends State<MainPage> {
     return Scaffold(
       body: _children[_currentIndex], // new
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Color(0xFFF8F8F8),
         onTap: _onTabTapped, // new
         currentIndex: _currentIndex, // new
         items: [
           new BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            title: Text('首页',style: _currentIndex==0?TextStyle(color: Color(0xFF02AF8A),fontSize: 11):TextStyle(color: Color(0xFF4E4E4E),fontSize: 11),),
+            title: Text('首页',style: _currentIndex==0? TextStyle(color: Color(0xFF02AF8A),fontSize: 11):TextStyle(color: Color(0xFF4E4E4E),fontSize: 11),),
             activeIcon: Icon(Icons.home,color: Color(0xFF02AF8A))
           ),
           new BottomNavigationBarItem(

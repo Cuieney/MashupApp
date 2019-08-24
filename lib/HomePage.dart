@@ -92,6 +92,9 @@ class _HomeListState extends State<HomeList> {
           "https://pic2.zhimg.com/50/v2-4977a5b1688ee7b9ee49d3f2f8d23684_b.jpg";
       data.url = "https://www.zhihu.com/question/342015157";
       data.from = "知乎";
+      data.repost = 10;
+      data.comment = 10;
+      data.like= 10;
       list.add(data);
     }
     setState(() {
@@ -108,77 +111,134 @@ class HomeItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Container(
-        child: Column(
-          children: <Widget>[
-            Container(
-              child: Row(
-                children: <Widget>[
-                  Container(
-                    width: 50,
-                    height: 50,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: NetworkImage(homeData.headUrl),
-                            fit: BoxFit.cover),
-                        borderRadius: BorderRadius.circular(5)),
-                  ),
-                  Column(
+      child: Column(children: <Widget>[
+
+        Container(
+            padding: EdgeInsets.only(left: 10, top: 10, right: 10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Container(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Container(
-                        alignment: Alignment.topLeft,
-                        child: Text(
-                          homeData.from,
-                          textAlign: TextAlign.left,
-                          style:
-                              TextStyle(fontSize: 15, color: Color(0xff212121)),
-                        ),
+                        width: 50,
+                        height: 50,
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: NetworkImage(homeData.headUrl),
+                                fit: BoxFit.cover),
+                            borderRadius: BorderRadius.circular(5)),
                       ),
+                      Expanded(
+                          child: Container(
+                              padding: EdgeInsets.only(left: 10),
+                              alignment: Alignment.topLeft,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Container(
+                                    alignment: Alignment.topLeft,
+                                    child: Text(
+                                      homeData.from,
+                                      textAlign: TextAlign.left,
+                                      style: TextStyle(
+                                          fontSize: 15, color: Color(0xff212121)),
+                                    ),
+                                  ),
+                                  Container(
+                                    alignment: Alignment.topLeft,
+                                    child: Text(
+                                      "${homeData.userName}  ${homeData.time}",
+                                      textAlign: TextAlign.left,
+                                      style: TextStyle(
+                                          fontSize: 10, color: Color(0xff999999)),
+                                    ),
+                                  ),
+                                ],
+                              ))),
                       Container(
-                        alignment: Alignment.topLeft,
-                        child: Text(
-
-                          "${homeData.userName}  ${homeData.time}",
-                          textAlign: TextAlign.left,
-                          style:
-                              TextStyle(fontSize: 10, color: Color(0xff999999)),
-                        ),
-                      ),
+                          alignment: Alignment.topRight,
+                          width: 55,
+                          height: 25,
+                          child: Material(
+                            color: Color(0xFF02AF8A),
+                            child: Center(
+                              child: Text(
+                                "关注",
+                                style:
+                                TextStyle(fontSize: 12, color: Colors.white),
+                              ),
+                            ),
+                            borderRadius: BorderRadius.circular(15.0),
+                          )),
                     ],
                   ),
-                  Material(
-                    child: RaisedButton(
-                      onPressed: null,
-                      color: Color(0xFF02AF8A),
-                      child: Center(
-                        child: Text(
-                          "关注",
-                          style: TextStyle(fontSize: 12, color: Colors.white),
-                        ),
+                ),
+                Container(
+                  padding: EdgeInsets.only(top: 10),
+                  child: Text(
+                    homeData.title,
+                    style: TextStyle(fontSize: 16, color: Color(0xff212121)),
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.only(top: 10, bottom: 20),
+                  child: Text(
+                    homeData.desc,
+                    style: TextStyle(fontSize: 15, color: Color(0xff4E4E4E)),
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.only(bottom: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      
+                      Row(
+                        children: <Widget>[
+                          Icon(Icons.thumb_up,color: Color(0xFF333333),),
+                          Container(padding: EdgeInsets.only(right: 10,left: 5),child: Text("${homeData.like}",style: TextStyle(color: Color(0xFF212121),fontSize: 15)),),
+                          
+                        ],
                       ),
-                    ),
-                    borderRadius: BorderRadius.circular(20.0),
-                    shadowColor: Colors.grey,
-                    elevation: 5.0,
-                  )
-                ],
-              ),
-            ),
-            Container(
-              child: Text(
-                homeData.title,
-                style: TextStyle(color: Color(0xff212121)),
-              ),
-            ),
-            Container(
-              child: Text(
-                homeData.desc,
-                style: TextStyle(color: Color(0xff4e4e4e)),
-              ),
-            ),
-          ],
-        ),
-      ),
+
+                      Row(
+                        children: <Widget>[
+                          Icon(Icons.comment,color: Color(0xFF333333)),
+                          Container(padding: EdgeInsets.only(right: 10,left: 5),child: Text("${homeData.comment}",style: TextStyle(color: Color(0xFF212121),fontSize: 15)),),
+                        ],
+                      ),
+
+                      Row(
+                        children: <Widget>[
+                          Icon(Icons.repeat,color: Color(0xFF333333)),
+                          Container(padding: EdgeInsets.only(right: 10,left: 5),child: Text("${homeData.repost}",style: TextStyle(color: Color(0xFF212121),fontSize: 15)),),
+                        ],
+                      ),
+
+                      Row(
+                        children: <Widget>[
+                          Icon(Icons.star,color: Color(0xFF333333))
+                        ],
+                      ),
+                      
+                    ],
+                    
+                  ),
+
+                )
+              ],
+            )),
+        Container(
+          color: Color(0xFFF1F1F1),
+          height: 10,
+          child: null,
+        )
+
+      ],),
     );
   }
 }

@@ -82,6 +82,7 @@ class LoginPage extends StatelessWidget {
               width: double.infinity,
               height: 50,
               margin: EdgeInsets.fromLTRB(30, 0, 30, 0),
+              padding: EdgeInsets.only(bottom: 10),
               child: Builder(
                 builder: (context) => RaisedButton(
                       child: Text(
