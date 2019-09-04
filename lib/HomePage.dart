@@ -221,7 +221,7 @@ class HomeItem extends StatelessWidget {
 
                       Row(
                         children: <Widget>[
-                          Icon(Icons.star,color: Color(0xFF333333))
+                          Icon(Icons.star_border,color: Color(0xFF333333))
                         ],
                       ),
                       
