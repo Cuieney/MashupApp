@@ -14,9 +14,10 @@ class HomeDataResp{
   int comment;
   int repost;
   int collect;
+  List<String> imgs;
 
   HomeDataResp({this.url, this.headUrl, this.userName, this.time, this.title,
-    this.from, this.desc, this.like, this.comment, this.repost, this.collect});
+    this.from, this.desc, this.like, this.comment, this.repost, this.collect,this.imgs});
 
 
 
