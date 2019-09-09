@@ -8,7 +8,6 @@ import 'package:news_app/ResetPassword.dart';
 import 'Register.dart';
 
 void main() {
-  
   runApp(MaterialApp(
     home: LoginPage(),
     color: Colors.white,
@@ -120,7 +119,7 @@ class LoginPage extends StatelessWidget {
   }
 
   _onLogin(BuildContext context) {
-    if (phoneNumber == "18365268012" && userPassword == "123456") {
+    if (phoneNumber == "12345678901" && userPassword == "123456") {
       log("login success");
       _showToast(context, "登录成功");
     } else {

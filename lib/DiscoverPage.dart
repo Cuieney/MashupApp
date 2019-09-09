@@ -56,11 +56,11 @@ class _DiscoverPageState extends State<DiscoverChildPage> {
 
   syncData() async {
     List<DiscoverDataResp> list = [];
-    for (int i = 0; i < 8; i++) {
+    for (int i = 0; i < 3; i++) {
       var data = DiscoverDataResp();
       data.type = "今日推荐${i}";
       List<DiscoverItem> itemList = [];
-      for (int j = 0; j < 8; j++) {
+      for (int j = 0; j < 5; j++) {
         var item = DiscoverItem();
         item.desc = "巴拉巴拉巴咯拉巴咯拉巴咯";
         item.url =

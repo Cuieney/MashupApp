@@ -105,7 +105,7 @@ class _HomeListState extends State<HomeList> {
 
   _getDateFromNet() async {
     List<HomeDataResp> list = [];
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 3; i++) {
       var data = HomeDataResp();
       data.desc = "21 日晚，离婚相关争议，随后具惠善也发文回击，称是自己因养的小狗去世先得的抑郁";
       data.title = "如何看待具惠善回击安宰贤?";
