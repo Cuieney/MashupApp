@@ -1,12 +1,14 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:news_app/MainPage.dart';
 import 'package:news_app/ResetPassword.dart';
 
 import 'Register.dart';
 
 void main() {
+  
   runApp(MaterialApp(
     home: LoginPage(),
     color: Colors.white,
@@ -14,8 +16,16 @@ void main() {
       "register": (context) => RegisterPage(),
       "reset": (context) => ResetPassword(),
       "home": (context) => MainPage(),
-
     },
+  ));
+
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    systemNavigationBarColor: Color(0xFF000000),
+    systemNavigationBarDividerColor: null,
+    systemNavigationBarIconBrightness: Brightness.light,
+    statusBarIconBrightness: Brightness.dark,
+    statusBarBrightness: Brightness.light,
+    statusBarColor: Colors.white, // status bar color
   ));
 }
 
@@ -26,78 +36,79 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.white,
         body: SingleChildScrollView(
-      child: Container(
-          child: Column(
-        children: <Widget>[
-          Container(
-              margin: EdgeInsets.only(left: 40, top: 113, bottom: 80),
-              alignment: Alignment.topLeft,
-              child: Text(
-                "欢迎回来",
-                style: TextStyle(
-                    fontSize: 35,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black),
-              )),
-          Container(
-            margin: EdgeInsets.fromLTRB(30, 0, 30, 0),
-            child: TextField(
-              keyboardType: TextInputType.number,
-              decoration: InputDecoration(
-                border: InputBorder.none,
-                contentPadding: EdgeInsets.all(10),
-                hintText: "手机号",
+          child: Container(
+              child: Column(
+            children: <Widget>[
+              Container(
+                  margin: EdgeInsets.only(left: 40, top: 113, bottom: 80),
+                  alignment: Alignment.topLeft,
+                  child: Text(
+                    "欢迎回来",
+                    style: TextStyle(
+                        fontSize: 35,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black),
+                  )),
+              Container(
+                margin: EdgeInsets.fromLTRB(30, 0, 30, 0),
+                child: TextField(
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    contentPadding: EdgeInsets.all(10),
+                    hintText: "手机号",
+                  ),
+                  cursorColor: Color(0xFF02AF8A),
+                  onChanged: _onPhoneInputTextChange,
+                  autofocus: false,
+                ),
               ),
-              cursorColor: Color(0xFF02AF8A),
-              onChanged: _onPhoneInputTextChange,
-              autofocus: false,
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.fromLTRB(30, 0, 30, 0),
-            child: Divider(),
-          ),
-          Container(
-            margin: EdgeInsets.fromLTRB(30, 30, 30, 0),
-            child: TextField(
-              keyboardType: TextInputType.text,
-              obscureText: true,
-              decoration: InputDecoration(
-                border: InputBorder.none,
-                contentPadding: EdgeInsets.all(10),
-                hintText: "密码",
+              Container(
+                margin: EdgeInsets.fromLTRB(30, 0, 30, 0),
+                child: Divider(),
               ),
-              cursorColor: Color(0xFF02AF8A),
-              onChanged: _onPasswordInputTextChange,
-              autofocus: false,
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.fromLTRB(30, 0, 30, 0),
-            child: Divider(),
-          ),
-          RowLayout(),
-          Container(
-              width: double.infinity,
-              height: 50,
-              margin: EdgeInsets.fromLTRB(30, 0, 30, 0),
-              padding: EdgeInsets.only(bottom: 10),
-              child: Builder(
-                builder: (context) => RaisedButton(
-                      child: Text(
-                        "登录",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      onPressed: () => _onLogin(context),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(50)),
-                      splashColor: Color(0xFF02AF8A),
-                    ),
-              ))
-        ],
-      )),
-    ));
+              Container(
+                margin: EdgeInsets.fromLTRB(30, 30, 30, 0),
+                child: TextField(
+                  keyboardType: TextInputType.text,
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    contentPadding: EdgeInsets.all(10),
+                    hintText: "密码",
+                  ),
+                  cursorColor: Color(0xFF02AF8A),
+                  onChanged: _onPasswordInputTextChange,
+                  autofocus: false,
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.fromLTRB(30, 0, 30, 0),
+                child: Divider(),
+              ),
+              RowLayout(),
+              Container(
+                  width: double.infinity,
+                  height: 50,
+                  margin: EdgeInsets.fromLTRB(30, 0, 30, 0),
+                  padding: EdgeInsets.only(bottom: 10),
+                  child: Builder(
+                    builder: (context) => RaisedButton(
+                          child: Text(
+                            "登录",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          onPressed: () => _onLogin(context),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(50)),
+                          splashColor: Color(0xFF02AF8A),
+                        ),
+                  ))
+            ],
+          )),
+        ));
   }
 
   _onPhoneInputTextChange(String phone) {
@@ -112,7 +123,6 @@ class LoginPage extends StatelessWidget {
     if (phoneNumber == "18365268012" && userPassword == "123456") {
       log("login success");
       _showToast(context, "登录成功");
-
     } else {
       log("login fail");
       _showToast(context, "验证账号密码失败");
@@ -152,4 +162,3 @@ class RowLayout extends StatelessWidget {
     );
   }
 }
-

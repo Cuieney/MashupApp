@@ -5,14 +5,13 @@ class MePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
+    return  Container(
         color: Color(0xffF1F1F1),
         child: Column(
           children: <Widget>[
             Container(
               color: Colors.white,
-              padding: EdgeInsets.only(top: 50, bottom: 15),
+              padding: EdgeInsets.only(top: 30, bottom: 15),
               child: Center(
                 child: Text("我的",
                     style: TextStyle(fontSize: 18, color: Color(0xff212121))),
@@ -79,8 +78,8 @@ class MePage extends StatelessWidget {
             ),
             Container(
               color: Colors.white,
-              padding:
-                  EdgeInsets.only(top: 10, right: 10, left: 10, bottom: 20),
+              height: 60,
+              padding: EdgeInsets.only(left: 10,right: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
@@ -229,7 +228,6 @@ class MePage extends StatelessWidget {
                   )
           ],
         ),
-      ),
-    );
+      );
   }
 }

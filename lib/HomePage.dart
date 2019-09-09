@@ -6,17 +6,15 @@ import 'model/HomeDataResp.dart';
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        child: TopTabBar(),
-      ),
+    return Container(
+      child: TopTabBar(),
     );
   }
 }
 
 class TopTabBar extends StatelessWidget {
   final List<Tab> myTabs = <Tab>[
-    new Tab(text: '推荐'),
+    new Tab(text: '推荐',),
     new Tab(text: '本地'),
     new Tab(text: '娱乐'),
     new Tab(text: '体育'),
@@ -31,9 +29,34 @@ class TopTabBar extends StatelessWidget {
       length: myTabs.length,
       child: Scaffold(
         appBar: AppBar(
+
+          actions: <Widget>[
+            Container(
+              width: 30,
+              height: 30,
+              child: Icon(
+                Icons.add,
+                color: Color(0xFF696969),
+              ),
+            ),
+            Container(
+              width: 30,
+              height: 30,
+              child: Icon(
+                Icons.search,
+                color: Color(0xFF696969),
+              ),
+            ),
+          ],
+          toolbarOpacity: 0.8,
+          brightness:Brightness.light,
           backgroundColor: Colors.white,
           automaticallyImplyLeading: false,
+          elevation: 0,
+          titleSpacing: 5,
           title: TabBar(
+            labelStyle: TextStyle(fontSize: 18,color: Color(0xFF02AF8A)),
+            unselectedLabelStyle: TextStyle(fontSize: 18,color: Color(0xFF666666)),
               indicatorColor: Colors.white,
               labelColor: Color(0xFF02AF8A),
               unselectedLabelColor: Color(0xFF666666),
@@ -194,30 +217,32 @@ class HomeItem extends StatelessWidget {
                       style: TextStyle(fontSize: 16, color: Color(0xff212121)),
                     ),
                   ),
-
-                  homeData.imgs.length>0?
-                  Container(
-                    child: GridView.builder(
-                      // physics: NeverScrollableScrollPhysics(),
-                      controller: new ScrollController(keepScrollOffset: false),
-                      shrinkWrap: true,
-                      scrollDirection: Axis.vertical,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 3,
-                          mainAxisSpacing: 2,
-                          crossAxisSpacing: 2,
-                          childAspectRatio: 1),
-                      itemBuilder: (BuildContext context, int index) {
-                        return Container(
-                            color: Colors.yellowAccent,
-                            width: 50,
-                            height: 50,
-                            child: Image.network(homeData.imgs[index],
-                                fit: BoxFit.cover));
-                      },
-                      itemCount: homeData.imgs.length,
-                    ),
-                  ):Container(),
+                  homeData.imgs.length > 0
+                      ? Container(
+                          child: GridView.builder(
+                            // physics: NeverScrollableScrollPhysics(),
+                            controller:
+                                new ScrollController(keepScrollOffset: false),
+                            shrinkWrap: true,
+                            scrollDirection: Axis.vertical,
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 3,
+                                    mainAxisSpacing: 2,
+                                    crossAxisSpacing: 2,
+                                    childAspectRatio: 1),
+                            itemBuilder: (BuildContext context, int index) {
+                              return Container(
+                                  color: Colors.yellowAccent,
+                                  width: 50,
+                                  height: 50,
+                                  child: Image.network(homeData.imgs[index],
+                                      fit: BoxFit.cover));
+                            },
+                            itemCount: homeData.imgs.length,
+                          ),
+                        )
+                      : Container(),
                   Container(
                     padding: EdgeInsets.only(top: 10, bottom: 20),
                     child: Text(
