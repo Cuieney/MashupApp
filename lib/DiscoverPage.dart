@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'WebViewPage.dart';
 import 'model/DiscoverDataResp.dart';
 
 class DiscoverPage extends StatelessWidget {
@@ -201,40 +202,52 @@ class DiscoverItemView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Container(
-        margin: EdgeInsets.only(right: 10),
-        child: Stack(
-          alignment: FractionalOffset(0, 1),
-          children: <Widget>[
-            Container(
+      child: GestureDetector(
+        onTap: (){
+          Navigator.of(context)
+              .push(new MaterialPageRoute(builder: (_) {
+            return WebViewPage(
+              url: "https://flutter-io.cn/",
+              title: "Flutter 中文社区",
+            );
+          }));
+        },
+        child: Container(
+
+          margin: EdgeInsets.only(right: 10),
+          child: Stack(
+            alignment: FractionalOffset(0, 1),
+            children: <Widget>[
+              Container(
+                  width: 230,
+                  height: 230,
+                  color: Colors.yellowAccent,
+                  child: Image.network(dataItem.url, fit: BoxFit.cover)),
+              Container(
+                height: 60,
                 width: 230,
-                height: 230,
-                color: Colors.yellowAccent,
-                child: Image.network(dataItem.url, fit: BoxFit.cover)),
-            Container(
-              height: 60,
-              width: 230,
-              child: Stack(
-                children: <Widget>[
-                  Opacity(
-                    opacity: 0.5,
-                    child: Container(
-                      padding: EdgeInsets.all(10),
-                      color: Colors.black,
+                child: Stack(
+                  children: <Widget>[
+                    Opacity(
+                      opacity: 0.5,
+                      child: Container(
+                        padding: EdgeInsets.all(10),
+                        color: Colors.black,
+                      ),
                     ),
-                  ),
-                  Container(
-                      padding: EdgeInsets.all(10),
-                      child: Text(
-                        dataItem.desc,
-                        style: TextStyle(color: Colors.white, fontSize: 15),
-                      ))
-                ],
-              ),
-            )
-          ],
+                    Container(
+                        padding: EdgeInsets.all(10),
+                        child: Text(
+                          dataItem.desc,
+                          style: TextStyle(color: Colors.white, fontSize: 15),
+                        ))
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
-      ),
+      )
     );
   }
 }
