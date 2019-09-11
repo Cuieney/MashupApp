@@ -15,7 +15,7 @@ class DiscoverPage extends StatelessWidget {
           Container(
             alignment: Alignment.center,
             color: Colors.white,
-            padding: EdgeInsets.only(top: 30, bottom: 15),
+            padding: EdgeInsets.only(top: 45, bottom: 15),
             child: Text(
               "发现",
               style: TextStyle(color: Color(0xFF212121), fontSize: 18),

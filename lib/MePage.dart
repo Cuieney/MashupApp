@@ -11,7 +11,7 @@ class MePage extends StatelessWidget {
           children: <Widget>[
             Container(
               color: Colors.white,
-              padding: EdgeInsets.only(top: 30, bottom: 15),
+              padding: EdgeInsets.only(top: 45, bottom: 15),
               child: Center(
                 child: Text("我的",
                     style: TextStyle(fontSize: 18, color: Color(0xff212121))),
