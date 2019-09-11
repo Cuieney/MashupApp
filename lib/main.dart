@@ -1,34 +1,28 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:news_app/MainPage.dart';
+import 'package:news_app/ResetPassword.dart';
+
+import 'Login.dart';
+import 'Register.dart';
 void main() {
-  runApp(new MyHomePage());
-}
+  runApp(MaterialApp(
+    home: LoginPage(),
+    color: Colors.white,
+    routes: {
+      "register": (context) => RegisterPage(),
+      "reset": (context) => ResetPassword(),
+      "home": (context) => MainPage(),
+    },
+  ));
 
-class MyHomePage extends StatelessWidget{
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    return MaterialApp(
-      title: "test",
-      home: Scaffold(
-        body: Center(
-          child: Text(
-            "欢迎回来",
-            textAlign: TextAlign.right,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(
-              color: Colors.black,
-                fontSize: 30,
-              fontWeight:FontWeight.bold
-            ),
-
-          ),
-          
-        ),
-      ),
-      
-    );
-  }
-
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    systemNavigationBarColor: Color(0xFF000000),
+    systemNavigationBarDividerColor: null,
+    systemNavigationBarIconBrightness: Brightness.light,
+    statusBarIconBrightness: Brightness.dark,
+    statusBarBrightness: Brightness.light,
+    statusBarColor: Colors.white, // status bar color
+  ));
 }
