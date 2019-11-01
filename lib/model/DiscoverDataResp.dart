@@ -5,6 +5,7 @@ import 'package:json_annotation/json_annotation.dart';
 class DiscoverDataResp{
   String type;
   List<DiscoverItem> list;
+  String url;
   DiscoverDataResp({this.type,this.list});
 
 }

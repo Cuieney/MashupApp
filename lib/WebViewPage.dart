@@ -40,7 +40,11 @@ class _WebViewPageState extends State<WebViewPage> {
                   IconButton(
                     icon: const Icon(Icons.arrow_back_ios),
                     onPressed: () {
-                      viewController.goBack();
+                      viewController.canGoBack()
+                      .then((val){
+                        val?viewController.goBack():Navigator.pop(context);
+                      });
+
                     },
                   ),
                 ],
