@@ -45,8 +45,9 @@ class _DiscoverListState extends State<DiscoverList> {
             ),
           ),
           Container(
-            height: 60,
+            height: 80,
             child: ListView.separated(
+              padding: EdgeInsets.zero,
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
                 return Container(
@@ -64,6 +65,7 @@ class _DiscoverListState extends State<DiscoverList> {
           Expanded(
             child: Container(
               child: ListView.separated(
+                padding: EdgeInsets.zero,
                 scrollDirection: Axis.vertical,
                 itemBuilder: (context, index) {
                   return Container(
@@ -129,7 +131,7 @@ class TypeList extends StatelessWidget {
         children: <Widget>[
           Container(
               child: ClipRRect(
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(5),
                   child: Image.network(
                       'https://pic2.zhimg.com/v2-639b49f2f6578eabddc458b84eb3c6a1.jpg',
                       width: 30,
@@ -146,7 +148,7 @@ class TypeList extends StatelessWidget {
                 width: 55,
                 height: 25,
                 child: Material(
-                  color: Color(0xFF02AF8A),
+                  color: Color(0xFF4A90E2),
                   child: Center(
                     child: Text(
                       "关注",
@@ -171,8 +173,8 @@ class DiscoverListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 60,
       alignment: Alignment.center,
+      width: 80,
       child: Column(
         children: <Widget>[
           CircleAvatar(

@@ -16,22 +16,25 @@ class NewHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      alignment: Alignment.center,
-      color: Colors.white,
+      color: Color(0xFFEFEFED),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           Container(
+            color: Colors.white,
             margin: EdgeInsets.only(top: 20),
             alignment: Alignment.center,
             height: 60,
             child: Text(
-              "发现",
-              style: TextStyle(color: Color(0xFF212121), fontSize: 18),
+              "Linker",
+              style: TextStyle(color: Color(0xFF212121), fontSize: 18,fontWeight: FontWeight.bold),
             ),
           ),
           Expanded(
-            child: DataListContainer(),
+            child: Container(
+              child: DataListContainer(),
+            ),
+
           ),
         ],
       ),
@@ -79,8 +82,12 @@ class _DataListState extends State<DataListContainer> {
       List<String> imgs = [];
       if (i == 1) {
         for (int j = 0; j < 6; j++) {
-          imgs.add(
-              "https://upload-images.jianshu.io/upload_images/5440469-51c9d22950008274.png?imageMogr2/auto-orient/strip|imageView2/2/w/564/format/webp");
+          if(j == 2){
+            imgs.add("https://static.cnodejs.org/FhbRjHzt02UssAWL7pa4b6rOvh78");
+          }else{
+            imgs.add(
+                "https://upload-images.jianshu.io/upload_images/5440469-51c9d22950008274.png?imageMogr2/auto-orient/strip|imageView2/2/w/564/format/webp");
+          }
         }
       }
       data.imgs = imgs;
@@ -100,14 +107,16 @@ class DataList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: Colors.white,
       child: ListView.separated(
+          padding: EdgeInsets.zero,
           itemBuilder: (context, index) {
-            return HomeItem(homeData: dataList[index]);
+            return HomeItem(homeData: dataList[index],index: index,);
           },
           separatorBuilder: (context, index) {
             return Container(
-              height: 1,
-              color: Color(0xFFF1F1F1),
+              height: 10,
+              color: Color(0xFFEFEFED),
             );
           },
           itemCount: dataList.length),

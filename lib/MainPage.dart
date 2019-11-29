@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:news_app/DiscoverPage.dart';
-import 'package:news_app/HomePage.dart';
+import 'package:news_app/DiscoverPage2.dart';
+import 'package:news_app/HomePage2.dart';
 import 'package:news_app/MePage.dart';
 
 // void main() {
@@ -30,7 +30,7 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   int _currentIndex = 0;
-  final List<Widget> _children = [HomePage(), DiscoverPage(), MePage()];
+  final List<Widget> _children = [NewHomePage(), DiscoverList(), MePage()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,28 +48,28 @@ class _MainPageState extends State<MainPage> {
               title: Text(
                 '首页',
                 style: _currentIndex == 0
-                    ? TextStyle(color: Color(0xFF02AF8A), fontSize: 11)
+                    ? TextStyle(color: Color(0xFF4A90E2), fontSize: 11)
                     : TextStyle(color: Color(0xFF4E4E4E), fontSize: 11),
               ),
-              activeIcon: Icon(Icons.home, color: Color(0xFF02AF8A))),
+              activeIcon: Icon(Icons.home, color: Color(0xFF4A90E2))),
           new BottomNavigationBarItem(
               icon: Icon(Icons.mail),
               title: Text(
                 '发现',
                 style: _currentIndex == 1
-                    ? TextStyle(color: Color(0xFF02AF8A), fontSize: 11)
+                    ? TextStyle(color: Color(0xFF4A90E2), fontSize: 11)
                     : TextStyle(color: Color(0xFF4E4E4E), fontSize: 11),
               ),
-              activeIcon: Icon(Icons.mail, color: Color(0xFF02AF8A))),
+              activeIcon: Icon(Icons.mail, color: Color(0xFF4A90E2))),
           new BottomNavigationBarItem(
               icon: Icon(Icons.person),
               title: Text(
                 '我的',
                 style: _currentIndex == 2
-                    ? TextStyle(color: Color(0xFF02AF8A), fontSize: 11)
+                    ? TextStyle(color: Color(0xFF4A90E2), fontSize: 11)
                     : TextStyle(color: Color(0xFF4E4E4E), fontSize: 11),
               ),
-              activeIcon: Icon(Icons.person, color: Color(0xFF02AF8A)))
+              activeIcon: Icon(Icons.person, color: Color(0xFF4A90E2)))
         ],
       ),
     );

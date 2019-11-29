@@ -1,16 +1,24 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:news_app/widgets/BackIcon.dart';
 import 'package:news_app/widgets/CountDownTextRoute.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
+
+import 'http/HttpConstant.dart';
 
 void main() {
   runApp(MaterialApp(color: Colors.white, home: RegisterPage()));
 }
 
+Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+String userName;
+String userEmail;
+String userPassword;
 class RegisterPage extends StatelessWidget {
-  var phoneNumber;
-  var userPassword;
+
 
   @override
   Widget build(BuildContext context) {
@@ -18,132 +26,176 @@ class RegisterPage extends StatelessWidget {
         body: SingleChildScrollView(
             child: Builder(
       builder: (context) => Container(
-              child: Column(
-            children: <Widget>[
-              Container(
-                alignment: Alignment.topLeft,
-                margin: EdgeInsets.only(left: 10, top: 50),
-                child: BackIcon(),
+          child: Column(
+        children: <Widget>[
+          Container(
+            alignment: Alignment.topLeft,
+            margin: EdgeInsets.only(left: 10, top: 50),
+            child: BackIcon(),
+          ),
+          Container(
+              margin: EdgeInsets.only(left: 40, top: 50, bottom: 80),
+              alignment: Alignment.topLeft,
+              child: Text(
+                "注册",
+                style: TextStyle(
+                    fontSize: 35,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black),
+              )),
+          Container(
+            margin: EdgeInsets.fromLTRB(30, 0, 30, 0),
+            child: TextField(
+              keyboardType: TextInputType.text,
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                contentPadding: EdgeInsets.all(10),
+                hintText: "用户名",
               ),
-              Container(
-                  margin: EdgeInsets.only(left: 40, top: 50, bottom: 80),
-                  alignment: Alignment.topLeft,
-                  child: Text(
-                    "注册",
-                    style: TextStyle(
-                        fontSize: 35,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black),
-                  )),
-              Container(
-                margin: EdgeInsets.fromLTRB(30, 0, 30, 0),
-                child: TextField(
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                    contentPadding: EdgeInsets.all(10),
-                    hintText: "手机号",
-                  ),
-                  cursorColor: Color(0xFF02AF8A),
-                  onChanged: _onPhoneInputTextChange,
-                  autofocus: false,
-                ),
+              cursorColor: Color(0xFF02AF8A),
+              onChanged: _onUserNameInputTextChange,
+              autofocus: false,
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.fromLTRB(30, 0, 30, 0),
+            child: Divider(),
+          ),
+          Container(
+            margin: EdgeInsets.fromLTRB(30, 0, 30, 0),
+            child: TextField(
+              keyboardType: TextInputType.emailAddress,
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                contentPadding: EdgeInsets.all(10),
+                hintText: "邮箱",
               ),
-              Container(
-                margin: EdgeInsets.fromLTRB(30, 0, 30, 0),
-                child: Divider(),
-              ),
-              Container(
-                margin: EdgeInsets.fromLTRB(30, 30, 30, 0),
-                child: Stack(
-                  alignment: FractionalOffset(1, 0.5),
-                  children: <Widget>[
-                    Container(
-                      child: TextField(
-                        keyboardType: TextInputType.text,
-                        obscureText: true,
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          contentPadding: EdgeInsets.all(10),
-                          hintText: "验证码",
-                        ),
-                        cursorColor: Color(0xFF02AF8A),
-                        onChanged: _onPasswordInputTextChange,
-                        autofocus: false,
-                      ),
+              cursorColor: Color(0xFF02AF8A),
+              onChanged: _onEmailInputTextChange,
+              autofocus: false,
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.fromLTRB(30, 0, 30, 0),
+            child: Divider(),
+          ),
+          Container(
+            margin: EdgeInsets.fromLTRB(30, 30, 30, 0),
+            child: Stack(
+              alignment: FractionalOffset(1, 0.5),
+              children: <Widget>[
+                Container(
+                  child: TextField(
+                    keyboardType: TextInputType.text,
+                    obscureText: true,
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      contentPadding: EdgeInsets.all(10),
+                      hintText: "验证码",
                     ),
-                    CountDownTextRoute()
-                  ],
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.fromLTRB(30, 0, 30, 0),
-                child: Divider(),
-              ),
-              Container(
-                margin: EdgeInsets.fromLTRB(30, 30, 30, 0),
-                child: TextField(
-                  keyboardType: TextInputType.text,
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                    contentPadding: EdgeInsets.all(10),
-                    hintText: "密码",
+                    cursorColor: Color(0xFF02AF8A),
+                    onChanged: _onPasswordInputTextChange,
+                    autofocus: false,
                   ),
-                  cursorColor: Color(0xFF02AF8A),
-                  onChanged: _onPasswordInputTextChange,
-                  autofocus: false,
                 ),
+                CountDownTextRoute()
+              ],
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.fromLTRB(30, 0, 30, 0),
+            child: Divider(),
+          ),
+          Container(
+            margin: EdgeInsets.fromLTRB(30, 30, 30, 0),
+            child: TextField(
+              keyboardType: TextInputType.text,
+              obscureText: true,
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                contentPadding: EdgeInsets.all(10),
+                hintText: "密码",
               ),
-              Container(
-                margin: EdgeInsets.fromLTRB(30, 0, 30, 0),
-                child: Divider(),
+              cursorColor: Color(0xFF02AF8A),
+              onChanged: _onPasswordInputTextChange,
+              autofocus: false,
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.fromLTRB(30, 0, 30, 0),
+            child: Divider(),
+          ),
+          Container(
+            width: double.infinity,
+            height: 50,
+            margin: EdgeInsets.fromLTRB(30, 50, 30, 0),
+            child: RaisedButton(
+              child: Text(
+                "注册",
+                style: TextStyle(color: Colors.white),
               ),
-              Container(
-                width: double.infinity,
-                height: 50,
-                margin: EdgeInsets.fromLTRB(30, 50, 30, 0),
-                child: RaisedButton(
-                  child: Text(
-                    "登录",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  onPressed: () => _onLogin(context),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(50)),
-                  splashColor: Color(0xFF02AF8A),
-                ),
-              ),
-              SwitchAndCheckBoxTestRoute(),
-            ],
-          )),
+              onPressed: () => _onRegister(context),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50)),
+              splashColor: Color(0xFF02AF8A),
+            ),
+          ),
+          SwitchAndCheckBoxTestRoute(),
+        ],
+      )),
     )));
   }
 
-  _onPhoneInputTextChange(String phone) {
-    phoneNumber = phone;
+  _onUserNameInputTextChange(String name) {
+    userName = name;
   }
 
   _onPasswordInputTextChange(String password) {
     userPassword = password;
   }
 
-  _onLogin(BuildContext context) {
-    if (phoneNumber == "18365268012" && userPassword == "123456") {
-      log("login success");
-      _showToast(context, "登录成功");
+  _onEmailInputTextChange(String email) {
+    userEmail = email;
+  }
+
+  bool isEmpty(String s) => s == null || s.isEmpty;
+
+  _onRegister(BuildContext context) {
+    if (!isEmpty(userName) &&!isEmpty(userEmail) &&!isEmpty(userPassword)) {
+      _doRegisterFromNet(context);
     } else {
-      log("login fail");
-      _showToast(context, "验证账号密码失败");
+      _showToast(context, "用户名密码存在未输入的情况！！！");
     }
+  }
+
+  _doRegisterFromNet(BuildContext context) async {
+    Map<String, String> bodyParams = new Map();
+    bodyParams["email"] = userEmail;
+    bodyParams["username"] = userName;
+    bodyParams["password"] = userPassword;
+    await http
+        .post(HttpConstant.register,
+            body: jsonEncode(bodyParams), encoding: Utf8Codec())
+        .then((http.Response response) {
+      if (response.statusCode == 200) {
+        var jsonResponse = jsonDecode(response.body);
+        _showToast(context, "注册成功");
+        _prefs.then((SharedPreferences preferences) {
+          preferences.setString("token", jsonResponse['token']);
+          Navigator.pop(context);
+        });
+      }else{
+        _showToast(context, "注册失败 ${response.statusCode}");
+      }
+    }).catchError((error) {
+      _showToast(context, "注册失败 $error");
+    });
   }
 
   _showToast(BuildContext context, String msg) {
     Scaffold.of(context).showSnackBar(SnackBar(content: Text("${msg}")));
   }
 }
-
-
 
 class SwitchAndCheckBoxTestRoute extends StatefulWidget {
   @override
@@ -166,7 +218,7 @@ class _SwitchAndCheckBoxTestRouteState
             width: 20,
             height: 35,
             margin: EdgeInsets.all(10),
-            child:  Checkbox(
+            child: Checkbox(
               value: _checkBoxSelected,
               activeColor: Color(0xFF02AF8A),
               onChanged: (value) {
@@ -176,7 +228,6 @@ class _SwitchAndCheckBoxTestRouteState
               },
             ),
           ),
-
           Text.rich(
             new TextSpan(
                 text: '我已阅读并同意某某的',

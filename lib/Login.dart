@@ -1,11 +1,15 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:news_app/MainPage.dart';
 import 'package:news_app/ResetPassword.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
 import 'Register.dart';
+import 'http/HttpConstant.dart';
+Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
 void main() {
   runApp(MaterialApp(
@@ -27,10 +31,10 @@ void main() {
     statusBarColor: Colors.white, // status bar color
   ));
 }
-
+var userName;
+var userPassword;
 class LoginPage extends StatelessWidget {
-  var phoneNumber;
-  var userPassword;
+
 
   @override
   Widget build(BuildContext context) {
@@ -53,11 +57,11 @@ class LoginPage extends StatelessWidget {
               Container(
                 margin: EdgeInsets.fromLTRB(30, 0, 30, 0),
                 child: TextField(
-                  keyboardType: TextInputType.number,
+                  keyboardType: TextInputType.text,
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     contentPadding: EdgeInsets.all(10),
-                    hintText: "手机号",
+                    hintText: "用户名或邮箱",
                   ),
                   cursorColor: Color(0xFF02AF8A),
                   onChanged: _onPhoneInputTextChange,
@@ -110,8 +114,8 @@ class LoginPage extends StatelessWidget {
         ));
   }
 
-  _onPhoneInputTextChange(String phone) {
-    phoneNumber = phone;
+  _onPhoneInputTextChange(String name) {
+    userName = name;
   }
 
   _onPasswordInputTextChange(String password) {
@@ -119,15 +123,43 @@ class LoginPage extends StatelessWidget {
   }
 
   _onLogin(BuildContext context) {
-    if (phoneNumber == "12345678901" && userPassword == "123456") {
+    if (!isEmpty(userName)  &&!isEmpty(userPassword)) {
       log("login success");
-      _showToast(context, "登录成功");
+      _doRegisterFromNet(context);
     } else {
       log("login fail");
       _showToast(context, "验证账号密码失败");
     }
-    Navigator.pushNamed(context, "home");
   }
+
+
+  bool isEmpty(String s) => s == null || s.isEmpty;
+
+  _doRegisterFromNet(BuildContext context) async {
+    Map<String, String> bodyParams = new Map();
+    bodyParams["email"] = '';
+    bodyParams["username"] = userName;
+    bodyParams["password"] = userPassword;
+    await http
+        .post(HttpConstant.login,
+        body: jsonEncode(bodyParams), encoding: Utf8Codec())
+        .then((http.Response response) {
+      if (response.statusCode == 200) {
+        var jsonResponse = jsonDecode(response.body);
+        _showToast(context, "登录成功");
+        _prefs.then((SharedPreferences preferences) {
+          preferences.setString("token", jsonResponse['token']);
+          Navigator.pop(context);
+          Navigator.pushNamed(context, "home");
+        });
+      }else{
+        _showToast(context, "登录失败 ${response.statusCode}");
+      }
+    }).catchError((error) {
+      _showToast(context, "登录失败 $error");
+    });
+  }
+
 
   _showToast(BuildContext context, String msg) {
     Scaffold.of(context).showSnackBar(SnackBar(content: Text("${msg}")));
