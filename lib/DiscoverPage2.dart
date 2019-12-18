@@ -1,5 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 
+import 'http/HttpConstant.dart';
+import 'http/HttpRequest.dart';
+import 'model/DIscoverModel.dart';
 import 'model/DiscoverDataResp.dart';
 import 'model/HomeDataResp.dart';
 import 'widgets/CustomeListView.dart';
@@ -17,7 +22,7 @@ class DiscoverList extends StatefulWidget {
 }
 
 class _DiscoverListState extends State<DiscoverList> {
-  List<DiscoverDataResp> dataList = [];
+  List<DiscoverModel> dataList = [];
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +34,8 @@ class _DiscoverListState extends State<DiscoverList> {
             height: 30,
           ),
           Container(
-            height: 40,
+            height: 35,
+            color: Color(0x224A90E2),
             margin: EdgeInsets.all(10),
             child: TextField(
               maxLines: 1,
@@ -37,29 +43,15 @@ class _DiscoverListState extends State<DiscoverList> {
               decoration: InputDecoration(
                 filled: true,
                 border: InputBorder.none,
-                contentPadding: EdgeInsets.only(top: 10),
-                prefixIcon: Icon(Icons.search),
-                hintText: "搜索",
+                contentPadding: EdgeInsets.only(top: 8),
+                prefixIcon: Icon(
+                  Icons.search,
+                  color: Color(0xFF4A90E2),
+                ),
+                hintText: "搜索你感兴趣的主题吧",
+                hintStyle: TextStyle(fontWeight: FontWeight.w400, fontSize: 14),
               ),
               autofocus: false,
-            ),
-          ),
-          Container(
-            height: 80,
-            child: ListView.separated(
-              padding: EdgeInsets.zero,
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) {
-                return Container(
-                  child: DiscoverListView(
-                    discoverDataResp: dataList[index],
-                  ),
-                );
-              },
-              separatorBuilder: (context, index) {
-                return Container();
-              },
-              itemCount: dataList.length,
             ),
           ),
           Expanded(
@@ -95,23 +87,28 @@ class _DiscoverListState extends State<DiscoverList> {
   }
 
   void getDataFromServer() async {
-    List<DiscoverDataResp> list = [];
-    for (int i = 0; i < 10; i++) {
-      var data = DiscoverDataResp();
-      data.type = "今日推荐${i}";
-      data.url =
-          "https://pic2.zhimg.com/v2-639b49f2f6578eabddc458b84eb3c6a1.jpg";
-      List<DiscoverItem> itemList = [];
-      for (int j = 0; j < 5; j++) {
-        var item = DiscoverItem();
-        item.desc = "巴拉巴拉巴咯拉巴咯拉巴咯";
-        item.url =
-            "https://upload-images.jianshu.io/upload_images/5440469-51c9d22950008274.png?imageMogr2/auto-orient/strip|imageView2/2/w/564/format/webp";
-        itemList.add(item);
-      }
-      data.list = itemList;
-      list.add(data);
-    }
+    List<DiscoverModel> list = [];
+
+    await HttpRequest.request(HttpConstant.type, Method.GET)
+        .then((dynamic response) {
+      var data = response['data'];
+      print("xxxxx ${response}");
+      print("xxxxx ${data}");
+
+      var listData = response['data'] as List;
+      print(listData.length);
+
+      list = listData.map((dynamic i) {
+        var data = new DiscoverModel();
+        data.title = i['title'];
+        data.id = i['id'];
+        data.image_url = i['image_url'];
+        return data;
+      }).toList();
+
+      print(list.length);
+    }).catchError((error) {});
+
     setState(() {
       dataList.addAll(list);
     });
@@ -119,7 +116,7 @@ class _DiscoverListState extends State<DiscoverList> {
 }
 
 class TypeList extends StatelessWidget {
-  final DiscoverDataResp discoverDataResp;
+  final DiscoverModel discoverDataResp;
 
   const TypeList({Key key, @required this.discoverDataResp}) : super(key: key);
 
@@ -132,13 +129,11 @@ class TypeList extends StatelessWidget {
           Container(
               child: ClipRRect(
                   borderRadius: BorderRadius.circular(5),
-                  child: Image.network(
-                      'https://pic2.zhimg.com/v2-639b49f2f6578eabddc458b84eb3c6a1.jpg',
-                      width: 30,
-                      height: 30))),
+                  child: Image.network(discoverDataResp.image_url,
+                      width: 30, height: 30))),
           Container(
             margin: EdgeInsets.only(left: 5),
-            child: Text("好奇心日报"),
+            child: Text("${discoverDataResp.title}"),
           ),
           Expanded(
               child: Container(
@@ -158,29 +153,6 @@ class TypeList extends StatelessWidget {
                   borderRadius: BorderRadius.circular(15.0),
                 )),
           ))
-        ],
-      ),
-    );
-  }
-}
-
-class DiscoverListView extends StatelessWidget {
-  final DiscoverDataResp discoverDataResp;
-
-  const DiscoverListView({Key key, @required this.discoverDataResp})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      width: 80,
-      child: Column(
-        children: <Widget>[
-          CircleAvatar(
-            backgroundImage: NetworkImage(discoverDataResp.url),
-          ),
-          Text(discoverDataResp.type, overflow: TextOverflow.ellipsis)
         ],
       ),
     );

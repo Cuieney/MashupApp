@@ -8,6 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
 import 'http/HttpConstant.dart';
+import 'http/HttpRequest.dart';
 
 void main() {
   runApp(MaterialApp(color: Colors.white, home: RegisterPage()));
@@ -173,19 +174,21 @@ class RegisterPage extends StatelessWidget {
     bodyParams["email"] = userEmail;
     bodyParams["username"] = userName;
     bodyParams["password"] = userPassword;
-    await http
-        .post(HttpConstant.register,
-            body: jsonEncode(bodyParams), encoding: Utf8Codec())
-        .then((http.Response response) {
-      if (response.statusCode == 200) {
-        var jsonResponse = jsonDecode(response.body);
+
+
+
+    await HttpRequest.request(HttpConstant.register, Method.POST,body: bodyParams)
+        .then((dynamic jsonResponse) {
+      int code = jsonResponse['code'];
+      print("$code , ${jsonResponse['msg']}");
+      if(code == 200){
         _showToast(context, "注册成功");
         _prefs.then((SharedPreferences preferences) {
           preferences.setString("token", jsonResponse['token']);
           Navigator.pop(context);
         });
       }else{
-        _showToast(context, "注册失败 ${response.statusCode}");
+        _showToast(context, "注册失败 ${jsonResponse['msg']}");
       }
     }).catchError((error) {
       _showToast(context, "注册失败 $error");

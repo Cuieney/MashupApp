@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:news_app/DiscoverPage2.dart';
 import 'package:news_app/HomePage2.dart';
-import 'package:news_app/MePage.dart';
+import 'package:news_app/MePage2.dart';
 
 // void main() {
  
@@ -30,46 +30,47 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   int _currentIndex = 0;
-  final List<Widget> _children = [NewHomePage(), DiscoverList(), MePage()];
+  final List<Widget> _children = [NewHomePage(), DiscoverList(), MePage2()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: _children[_currentIndex], // new
       bottomNavigationBar: BottomNavigationBar(
-        selectedFontSize: 11,
-        unselectedFontSize: 11,
-        backgroundColor: Color(0xFFF8F8F8),
+
+        selectedFontSize: 0,
+        unselectedFontSize: 0,
+        backgroundColor: Color(0xFFFFFFFF),
         onTap: _onTabTapped, // new
         currentIndex: _currentIndex, // new
+        iconSize: 20,
         items: [
           new BottomNavigationBarItem(
-          
-              icon: Icon(Icons.home),
+              icon: Image.asset('images/home.png',width: 20,height: 20,),
               title: Text(
-                '首页',
+                '',
                 style: _currentIndex == 0
-                    ? TextStyle(color: Color(0xFF4A90E2), fontSize: 11)
-                    : TextStyle(color: Color(0xFF4E4E4E), fontSize: 11),
+                    ? TextStyle(color: Color(0xFF4A90E2), fontSize: 0)
+                    : TextStyle(color: Color(0xFF4E4E4E), fontSize: 0),
               ),
-              activeIcon: Icon(Icons.home, color: Color(0xFF4A90E2))),
+              activeIcon: Image.asset('images/home_press.png',width: 20,height: 20,)),
           new BottomNavigationBarItem(
-              icon: Icon(Icons.mail),
+              icon: Image.asset('images/discover.png',width: 20,height: 20,),
               title: Text(
-                '发现',
+                '',
                 style: _currentIndex == 1
-                    ? TextStyle(color: Color(0xFF4A90E2), fontSize: 11)
-                    : TextStyle(color: Color(0xFF4E4E4E), fontSize: 11),
+                    ? TextStyle(color: Color(0xFF4A90E2), fontSize: 0)
+                    : TextStyle(color: Color(0xFF4E4E4E), fontSize: 0),
               ),
-              activeIcon: Icon(Icons.mail, color: Color(0xFF4A90E2))),
+              activeIcon: Image.asset('images/discover_press.png',width: 20,height: 20,)),
           new BottomNavigationBarItem(
-              icon: Icon(Icons.person),
+              icon: Image.asset('images/me.png',width: 20,height: 20,),
               title: Text(
-                '我的',
+                '',
                 style: _currentIndex == 2
-                    ? TextStyle(color: Color(0xFF4A90E2), fontSize: 11)
-                    : TextStyle(color: Color(0xFF4E4E4E), fontSize: 11),
+                    ? TextStyle(color: Color(0xFF4A90E2), fontSize: 0)
+                    : TextStyle(color: Color(0xFF4E4E4E), fontSize: 0),
               ),
-              activeIcon: Icon(Icons.person, color: Color(0xFF4A90E2)))
+              activeIcon: Image.asset('images/me_press.png',width: 20,height: 20,))
         ],
       ),
     );

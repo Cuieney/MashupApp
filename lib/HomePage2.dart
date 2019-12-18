@@ -27,14 +27,16 @@ class NewHomePage extends StatelessWidget {
             height: 60,
             child: Text(
               "Linker",
-              style: TextStyle(color: Color(0xFF212121), fontSize: 18,fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  color: Color(0xFF212121),
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold),
             ),
           ),
           Expanded(
             child: Container(
               child: DataListContainer(),
             ),
-
           ),
         ],
       ),
@@ -81,10 +83,10 @@ class _DataListState extends State<DataListContainer> {
       data.like = 10;
       List<String> imgs = [];
       if (i == 1) {
-        for (int j = 0; j < 6; j++) {
-          if(j == 2){
+        for (int j = 0; j < 9; j++) {
+          if (j == 2 || j == 5) {
             imgs.add("https://static.cnodejs.org/FhbRjHzt02UssAWL7pa4b6rOvh78");
-          }else{
+          } else {
             imgs.add(
                 "https://upload-images.jianshu.io/upload_images/5440469-51c9d22950008274.png?imageMogr2/auto-orient/strip|imageView2/2/w/564/format/webp");
           }
@@ -111,7 +113,10 @@ class DataList extends StatelessWidget {
       child: ListView.separated(
           padding: EdgeInsets.zero,
           itemBuilder: (context, index) {
-            return HomeItem(homeData: dataList[index],index: index,);
+            return HomeItem(
+              homeData: dataList[index],
+              index: index,
+            );
           },
           separatorBuilder: (context, index) {
             return Container(

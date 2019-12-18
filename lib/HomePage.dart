@@ -164,12 +164,7 @@ class HomeItem extends StatelessWidget {
       child: Container(
         child: Column(
           children: <Widget>[
-            index == 0
-                ? Container(
-              color: Color(0xFFEFEFED),
-              height: 10,
-            )
-                : Container(),
+
             Container(
                 padding: EdgeInsets.only(left: 10, top: 10, right: 10),
                 child: Column(

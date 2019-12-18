@@ -6,9 +6,10 @@ import 'package:flutter/services.dart';
 import 'package:news_app/MainPage.dart';
 import 'package:news_app/ResetPassword.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:http/http.dart' as http;
 import 'Register.dart';
 import 'http/HttpConstant.dart';
+import 'http/HttpRequest.dart';
+
 Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
 void main() {
@@ -31,13 +32,17 @@ void main() {
     statusBarColor: Colors.white, // status bar color
   ));
 }
+
 var userName;
 var userPassword;
+
 class LoginPage extends StatelessWidget {
-
-
   @override
   Widget build(BuildContext context) {
+    if (_onLogin2HomePage(context)) {
+      return null;
+    }
+
     return Scaffold(
         backgroundColor: Colors.white,
         body: SingleChildScrollView(
@@ -99,15 +104,15 @@ class LoginPage extends StatelessWidget {
                   padding: EdgeInsets.only(bottom: 10),
                   child: Builder(
                     builder: (context) => RaisedButton(
-                          child: Text(
-                            "登录",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          onPressed: () => _onLogin(context),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(50)),
-                          splashColor: Color(0xFF02AF8A),
-                        ),
+                      child: Text(
+                        "登录",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      onPressed: () => _onLogin(context),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50)),
+                      splashColor: Color(0xFF02AF8A),
+                    ),
                   ))
             ],
           )),
@@ -118,12 +123,27 @@ class LoginPage extends StatelessWidget {
     userName = name;
   }
 
+  bool _onLogin2HomePage(BuildContext context) {
+    bool status = false;
+    _prefs.then((SharedPreferences share) {
+      var token = share.get("token");
+      print("登录成功");
+      print(token);
+      if (token != null) {
+        status = true;
+        Navigator.pop(context);
+        Navigator.pushNamed(context, "home");
+      }
+    });
+    return status;
+  }
+
   _onPasswordInputTextChange(String password) {
     userPassword = password;
   }
 
   _onLogin(BuildContext context) {
-    if (!isEmpty(userName)  &&!isEmpty(userPassword)) {
+    if (!isEmpty(userName) && !isEmpty(userPassword)) {
       log("login success");
       _doRegisterFromNet(context);
     } else {
@@ -132,34 +152,35 @@ class LoginPage extends StatelessWidget {
     }
   }
 
-
   bool isEmpty(String s) => s == null || s.isEmpty;
 
   _doRegisterFromNet(BuildContext context) async {
     Map<String, String> bodyParams = new Map();
-    bodyParams["email"] = '';
+    bodyParams["email"] = "$userName@163.com";
     bodyParams["username"] = userName;
     bodyParams["password"] = userPassword;
-    await http
-        .post(HttpConstant.login,
-        body: jsonEncode(bodyParams), encoding: Utf8Codec())
-        .then((http.Response response) {
-      if (response.statusCode == 200) {
-        var jsonResponse = jsonDecode(response.body);
+
+    await HttpRequest.request(HttpConstant.login, Method.POST,body: bodyParams)
+        .then((dynamic jsonResponse) {
+      print("jsonResponse $jsonResponse");
+
+      int code = jsonResponse['code'];
+      print("$code , ${jsonResponse['msg']}");
+      if (code == 200) {
         _showToast(context, "登录成功");
         _prefs.then((SharedPreferences preferences) {
           preferences.setString("token", jsonResponse['token']);
-          Navigator.pop(context);
           Navigator.pushNamed(context, "home");
+          Navigator.pop(context);
         });
-      }else{
-        _showToast(context, "登录失败 ${response.statusCode}");
+      } else {
+        _showToast(context, "登录失败 ${jsonResponse['msg']}");
       }
     }).catchError((error) {
+      print("jsonResponse $error");
       _showToast(context, "登录失败 $error");
     });
   }
-
 
   _showToast(BuildContext context, String msg) {
     Scaffold.of(context).showSnackBar(SnackBar(content: Text("${msg}")));
