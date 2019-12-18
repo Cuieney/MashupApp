@@ -1,13 +1,9 @@
-import 'dart:convert';
 
 import 'package:flutter/material.dart';
 
 import 'http/HttpConstant.dart';
 import 'http/HttpRequest.dart';
 import 'model/DIscoverModel.dart';
-import 'model/DiscoverDataResp.dart';
-import 'model/HomeDataResp.dart';
-import 'widgets/CustomeListView.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -96,7 +92,6 @@ class _DiscoverListState extends State<DiscoverList> {
       print("xxxxx ${data}");
 
       var listData = response['data'] as List;
-      print(listData.length);
 
       list = listData.map((dynamic i) {
         var data = new DiscoverModel();
@@ -105,9 +100,9 @@ class _DiscoverListState extends State<DiscoverList> {
         data.image_url = i['image_url'];
         return data;
       }).toList();
-
-      print(list.length);
-    }).catchError((error) {});
+    }).catchError((error) {
+      print(error);
+    });
 
     setState(() {
       dataList.addAll(list);
@@ -123,7 +118,7 @@ class TypeList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(5),
+      margin: EdgeInsets.all(10),
       child: Row(
         children: <Widget>[
           Container(

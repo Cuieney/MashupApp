@@ -1,6 +1,6 @@
 class DiscoverModel {
   String title;
-  String id;
+  int id;
   String image_url;
 
   DiscoverModel({this.title, this.id, this.image_url});

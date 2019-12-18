@@ -5,7 +5,7 @@ import 'package:news_app/HomePage2.dart';
 import 'package:news_app/MePage2.dart';
 
 // void main() {
- 
+
 //   runApp(MainContainer());
 // }
 
@@ -31,46 +31,75 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   int _currentIndex = 0;
   final List<Widget> _children = [NewHomePage(), DiscoverList(), MePage2()];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _children[_currentIndex], // new
+      body: IndexedStack(
+        index: _currentIndex,
+        children: _children,
+      ), // new
       bottomNavigationBar: BottomNavigationBar(
-
         selectedFontSize: 0,
         unselectedFontSize: 0,
         backgroundColor: Color(0xFFFFFFFF),
-        onTap: _onTabTapped, // new
-        currentIndex: _currentIndex, // new
+        onTap: _onTabTapped,
+        // new
+        currentIndex: _currentIndex,
+        // new
         iconSize: 20,
         items: [
           new BottomNavigationBarItem(
-              icon: Image.asset('images/home.png',width: 20,height: 20,),
+              icon: Image.asset(
+                'images/home.png',
+                width: 20,
+                height: 20,
+              ),
               title: Text(
                 '',
                 style: _currentIndex == 0
                     ? TextStyle(color: Color(0xFF4A90E2), fontSize: 0)
                     : TextStyle(color: Color(0xFF4E4E4E), fontSize: 0),
               ),
-              activeIcon: Image.asset('images/home_press.png',width: 20,height: 20,)),
+              activeIcon: Image.asset(
+                'images/home_press.png',
+                width: 20,
+                height: 20,
+              )),
           new BottomNavigationBarItem(
-              icon: Image.asset('images/discover.png',width: 20,height: 20,),
+              icon: Image.asset(
+                'images/discover.png',
+                width: 20,
+                height: 20,
+              ),
               title: Text(
                 '',
                 style: _currentIndex == 1
                     ? TextStyle(color: Color(0xFF4A90E2), fontSize: 0)
                     : TextStyle(color: Color(0xFF4E4E4E), fontSize: 0),
               ),
-              activeIcon: Image.asset('images/discover_press.png',width: 20,height: 20,)),
+              activeIcon: Image.asset(
+                'images/discover_press.png',
+                width: 20,
+                height: 20,
+              )),
           new BottomNavigationBarItem(
-              icon: Image.asset('images/me.png',width: 20,height: 20,),
+              icon: Image.asset(
+                'images/me.png',
+                width: 20,
+                height: 20,
+              ),
               title: Text(
                 '',
                 style: _currentIndex == 2
                     ? TextStyle(color: Color(0xFF4A90E2), fontSize: 0)
                     : TextStyle(color: Color(0xFF4E4E4E), fontSize: 0),
               ),
-              activeIcon: Image.asset('images/me_press.png',width: 20,height: 20,))
+              activeIcon: Image.asset(
+                'images/me_press.png',
+                width: 20,
+                height: 20,
+              ))
         ],
       ),
     );
