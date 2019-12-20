@@ -28,14 +28,15 @@ class MePage2 extends StatelessWidget {
                   ),
                   Align(
                     alignment: Alignment.centerRight,
-                    child: Container(
-                        margin: EdgeInsets.only(right: 20),
-                        width: 15,
-                        height: 15,
-                        child: Icon(
-                          Icons.settings,
-                          color: Color(0xFF4A90E2),
-                        )),
+                    child: GestureDetector(
+                      onTap: () {},
+                      child: Container(
+                          margin: EdgeInsets.only(right: 20),
+                          child: Icon(
+                            Icons.settings,
+                            color: Color(0xFF4A90E2),
+                          )),
+                    ),
                   ),
                 ],
               )),
@@ -62,6 +63,7 @@ class MePage2 extends StatelessWidget {
                 Container(
                   margin: EdgeInsets.only(top: 10),
                   child: Text(
+                    
                     "Linda",
                     style: TextStyle(
                         color: Color(0xFF515151),
