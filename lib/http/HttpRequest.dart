@@ -25,6 +25,7 @@ class HttpRequest {
       body = new Map();
     }
     head['Content-Type'] = 'application/json';
+
     if (method == Method.POST) {
       return http
           .post(url, headers: head, body: jsonEncode(body))

@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 
 import 'http/HttpConstant.dart';
 import 'http/HttpRequest.dart';
-import 'model/DIscoverModel.dart';
+import 'model/DiscoverModel.dart';
+
 
 void main() {
   runApp(MaterialApp(
@@ -30,24 +31,27 @@ class _DiscoverListState extends State<DiscoverList> {
             height: 30,
           ),
           Container(
-            height: 35,
             color: Color(0x224A90E2),
             margin: EdgeInsets.all(10),
-            child: TextField(
+            
+            child: Center(
+              child: TextField(
+                textAlign: TextAlign.left,
               maxLines: 1,
               keyboardType: TextInputType.text,
               decoration: InputDecoration(
+
                 filled: true,
                 border: InputBorder.none,
-                contentPadding: EdgeInsets.only(top: 8),
                 prefixIcon: Icon(
                   Icons.search,
                   color: Color(0xFF4A90E2),
                 ),
                 hintText: "搜索你感兴趣的主题吧",
-                hintStyle: TextStyle(fontWeight: FontWeight.w400, fontSize: 14),
+                hintStyle: TextStyle(fontWeight: FontWeight.w400, fontSize: 15),
               ),
               autofocus: false,
+            ),
             ),
           ),
           Expanded(

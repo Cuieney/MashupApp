@@ -178,6 +178,7 @@ class LoginPage extends StatelessWidget {
       }
     }).catchError((error) {
       print("jsonResponse $error");
+      Navigator.pushNamed(context, "home");
       _showToast(context, "登录失败 $error");
     });
   }

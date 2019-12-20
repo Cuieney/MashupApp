@@ -233,7 +233,7 @@ class _SwitchAndCheckBoxTestRouteState
           ),
           Text.rich(
             new TextSpan(
-                text: '我已阅读并同意某某的',
+                text: '我已阅读并同意Linker的',
                 style: new TextStyle(
                     color: Color(0xFF999999),
                     fontSize: 13,

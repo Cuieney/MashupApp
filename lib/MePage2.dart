@@ -27,7 +27,6 @@ class MePage2 extends StatelessWidget {
                     ),
                   ),
                   Align(
-
                     alignment: Alignment.centerRight,
                     child: Container(
                         margin: EdgeInsets.only(right: 20),

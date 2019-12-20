@@ -1,44 +1,44 @@
 import 'package:flutter/material.dart';
 
 import 'HomePage.dart';
-import 'model/HomeDataResp.dart';
+import 'package:news_app/model/HomeDataResp.dart';
 
-void main() {
-  runApp(MaterialApp(
-    color: Color(0xFFF1F1F2),
-    home: NewHomePage(),
-  ));
-}
+//void main() {
+//  runApp(MaterialApp(
+//    color: Color(0xFFF1F1F2),
+//    home: NewHomePage(),
+//  ));
+//}
 
 class NewHomePage extends StatelessWidget {
   const NewHomePage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Color(0xFFEFEFED),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Container(
-            color: Colors.white,
-            margin: EdgeInsets.only(top: 20),
-            alignment: Alignment.center,
-            height: 60,
-            child: Text(
-              "Linker",
-              style: TextStyle(
-                  color: Color(0xFF212121),
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold),
+    return Scaffold(
+      body: Container(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Container(
+              color: Colors.white,
+              alignment: Alignment.center,
+              height: 60,
+              child: Text(
+                "Linker",
+                style: TextStyle(
+                    color: Color(0xFF212121),
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold),
+              ),
             ),
-          ),
-          Expanded(
-            child: Container(
-              child: DataListContainer(),
+            Expanded(
+              child: Container(
+                child: DataListContainer(),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

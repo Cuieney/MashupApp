@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rounded_progress_bar/flutter_rounded_progress_bar.dart';
 import 'package:flutter_rounded_progress_bar/rounded_progress_bar_style.dart';
 import 'package:news_app/WebViewPage.dart';
+import 'package:news_app/widgets/ShowImageDetailPage.dart';
 import 'dart:convert' show json;
 
-import 'model/HomeDataResp.dart';
+import 'package:news_app/model/HomeDataResp.dart';
+
 
 class HomePage extends StatelessWidget {
   @override
@@ -61,7 +63,7 @@ class TopTabBar extends StatelessWidget {
           title: TabBar(
               labelStyle: TextStyle(fontSize: 18, color: Color(0xFF02AF8A)),
               unselectedLabelStyle:
-              TextStyle(fontSize: 18, color: Color(0xFF666666)),
+                  TextStyle(fontSize: 18, color: Color(0xFF666666)),
               indicatorColor: Colors.white,
               labelColor: Color(0xFF02AF8A),
               unselectedLabelColor: Color(0xFF666666),
@@ -72,8 +74,8 @@ class TopTabBar extends StatelessWidget {
         ),
         body: TabBarView(
             children: myTabs.map((Tab tab) {
-              return HomeList(type: tab.text);
-            }).toList()),
+          return HomeList(type: tab.text);
+        }).toList()),
       ),
     );
   }
@@ -117,7 +119,7 @@ class _HomeListState extends State<HomeList> {
       data.userName = "cuieney";
       data.time = "五分钟前";
       data.headUrl =
-      "https://pic2.zhimg.com/50/v2-4977a5b1688ee7b9ee49d3f2f8d23684_b.jpg";
+          "https://pic2.zhimg.com/50/v2-4977a5b1688ee7b9ee49d3f2f8d23684_b.jpg";
       data.url = "https://www.zhihu.com/question/342015157";
       data.from = "知乎";
       data.repost = 10;
@@ -126,9 +128,10 @@ class _HomeListState extends State<HomeList> {
       List<String> imgs = [];
       if (i == 1) {
         for (int j = 0; j < 6; j++) {
-          if(j == 2){
-            imgs.add("https://upfile.asqql.com/2009pasdfasdfic2009s305985-ts/2019-6/20196921481957978.gif");
-          }else{
+          if (j == 2) {
+            imgs.add(
+                "https://upfile.asqql.com/2009pasdfasdfic2009s305985-ts/2019-6/20196921481957978.gif");
+          } else {
             imgs.add(
                 "https://upload-images.jianshu.io/upload_images/5440469-51c9d22950008274.png?imageMogr2/auto-orient/strip|imageView2/2/w/564/format/webp");
           }
@@ -164,7 +167,6 @@ class HomeItem extends StatelessWidget {
       child: Container(
         child: Column(
           children: <Widget>[
-
             Container(
                 padding: EdgeInsets.only(left: 10, top: 10, right: 10),
                 child: Column(
@@ -189,7 +191,7 @@ class HomeItem extends StatelessWidget {
                                   alignment: Alignment.topLeft,
                                   child: Column(
                                     crossAxisAlignment:
-                                    CrossAxisAlignment.start,
+                                        CrossAxisAlignment.start,
                                     children: <Widget>[
                                       Container(
                                         alignment: Alignment.topLeft,
@@ -204,8 +206,7 @@ class HomeItem extends StatelessWidget {
                                       Container(
                                         alignment: Alignment.topLeft,
                                         child: Text(
-                                          "${homeData.userName}  ${homeData
-                                              .time}",
+                                          "${homeData.userName}  ${homeData.time}",
                                           textAlign: TextAlign.left,
                                           style: TextStyle(
                                               fontSize: 10,
@@ -247,36 +248,44 @@ class HomeItem extends StatelessWidget {
                       child: Text(
                         homeData.title,
                         style:
-                        TextStyle(fontSize: 16, color: Color(0xff212121)),
+                            TextStyle(fontSize: 16, color: Color(0xff212121)),
                       ),
                     ),
                     homeData.imgs.length > 0
                         ? Container(
-                      margin: EdgeInsets.only(top: 10),
-                      child: GridView.builder(
-                        padding: EdgeInsets.zero,
-                        // physics: NeverScrollableScrollPhysics(),
-                        controller:
-                        new ScrollController(keepScrollOffset: false),
-                        shrinkWrap: true,
-                        scrollDirection: Axis.vertical,
-                        gridDelegate:
-                        SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 3,
-                            mainAxisSpacing: 2,
-                            crossAxisSpacing: 2,
-                            childAspectRatio: 1),
-                        itemBuilder: (BuildContext context, int index) {
-                          return Container(
-                              color: Colors.yellowAccent,
-                              width: 50,
-                              height: 50,
-                              child: Image.network(homeData.imgs[index],
-                                  fit: BoxFit.cover));
-                        },
-                        itemCount: homeData.imgs.length,
-                      ),
-                    )
+                            margin: EdgeInsets.only(top: 10),
+                            child: GridView.builder(
+                              padding: EdgeInsets.zero,
+                              // physics: NeverScrollableScrollPhysics(),
+                              controller:
+                                  new ScrollController(keepScrollOffset: false),
+                              shrinkWrap: true,
+                              scrollDirection: Axis.vertical,
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 3,
+                                      mainAxisSpacing: 2,
+                                      crossAxisSpacing: 2,
+                                      childAspectRatio: 1),
+                              itemBuilder: (BuildContext context, int index) {
+                                return Container(
+                                    color: Colors.yellowAccent,
+                                    width: 50,
+                                    height: 50,
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        Navigator.of(context).push(
+                                            new MaterialPageRoute(builder: (_) {
+                                          return ShowImageDetailPage(rsp: homeData);
+                                        }));
+                                      },
+                                      child: Image.network(homeData.imgs[index],
+                                          fit: BoxFit.cover),
+                                    ));
+                              },
+                              itemCount: homeData.imgs.length,
+                            ),
+                          )
                         : Container(),
                     Stack(
                       alignment: Alignment.centerLeft,
@@ -286,27 +295,37 @@ class HomeItem extends StatelessWidget {
                             height: 35,
                             decoration: BoxDecoration(
                                 image: DecorationImage(
-                                    image: NetworkImage("https://upload-images.jianshu.io/upload_images/5440469-51c9d22950008274.png?imageMogr2/auto-orient/strip|imageView2/2/w/564/format/webp"),
+                                    image: NetworkImage(
+                                        "https://upload-images.jianshu.io/upload_images/5440469-51c9d22950008274.png?imageMogr2/auto-orient/strip|imageView2/2/w/564/format/webp"),
                                     fit: BoxFit.cover),
-                                borderRadius: BorderRadius.only(topLeft: Radius.circular(2),bottomLeft: Radius.circular(2)))
-                        ),
+                                borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(2),
+                                    bottomLeft: Radius.circular(2)))),
                         Container(
                           alignment: Alignment.centerLeft,
                           margin: EdgeInsets.only(left: 40),
                           child: Column(
                             children: <Widget>[
                               Container(
-                                child: Text("Hello",style: TextStyle(fontSize: 12,fontWeight: FontWeight.normal),),
+                                child: Text(
+                                  "Hello",
+                                  style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.normal),
+                                ),
                               ),
                               Container(
-                                child: Text("Adele",style: TextStyle(fontSize: 10),),
+                                child: Text(
+                                  "Adele",
+                                  style: TextStyle(fontSize: 10),
+                                ),
                               ),
                             ],
                           ),
                         ),
                         Opacity(
                           opacity: 0.3,
-                          child:Container(
+                          child: Container(
                             child: RoundedProgressBar(
                               height: 35,
                               style: RoundedProgressBarStyle(
@@ -323,10 +342,11 @@ class HomeItem extends StatelessWidget {
                         Container(
                           alignment: Alignment.centerRight,
                           margin: EdgeInsets.only(right: 5),
-                          child: Icon(Icons.play_arrow,color: Color(0xFF4A90E2),),
+                          child: Icon(
+                            Icons.play_arrow,
+                            color: Color(0xFF4A90E2),
+                          ),
                         )
-
-
                       ],
                     ),
 
@@ -335,7 +355,7 @@ class HomeItem extends StatelessWidget {
                       child: Text(
                         homeData.desc,
                         style:
-                        TextStyle(fontSize: 15, color: Color(0xff4E4E4E)),
+                            TextStyle(fontSize: 15, color: Color(0xff4E4E4E)),
                       ),
                     ),
 //                  Container(
