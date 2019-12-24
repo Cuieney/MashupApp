@@ -22,8 +22,6 @@ class _SplashState extends State<Splash> {
     _initSplash();
   }
 
-
-
   void _initSplash() {
     _dispose = Observable.just(1).delay(Duration(microseconds: 2500)).listen((_) {
       _prefs.then((SharedPreferences share) {
@@ -31,11 +29,12 @@ class _SplashState extends State<Splash> {
         print("登录成功");
         print(token);
         if (token != null) {
-          NavigatorUtils.push(context, Routers.home, replace: true);
         }else{
           NavigatorUtils.push(context, Routers.login, replace: true);
         }
       });
+      NavigatorUtils.push(context, Routers.home, replace: true);
+
     });
   }
 

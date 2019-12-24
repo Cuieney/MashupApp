@@ -1,13 +1,14 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:linker/model/HomeDataResp.dart';
-import '../home/Splash.dart';
-import '../widgets/WebViewPage.dart';
-import '../login/Login.dart';
-import '../login/Register.dart';
-import '../login/ResetPassword.dart';
-import '../main/MainPage.dart';
-import '../widgets/ShowImageDetailPage.dart';
+import 'package:linker/home/Splash.dart';
+import 'package:linker/widgets/WebViewPage.dart';
+import 'package:linker/login/Login.dart';
+import 'package:linker/login/Register.dart';
+import 'package:linker/login/ResetPassword.dart';
+import 'package:linker/main/MainPage.dart';
+import 'package:linker/widgets/ShowImageDetailPage.dart';
+import 'package:linker/account/Setting.dart';
 import 'FluroConvertUtils.dart';
 
 class Routers {
@@ -32,9 +33,9 @@ class Routers {
         handler: Handler(handlerFunc: (_, params) => RegisterPage()));
     router.define(resetPassword,
         handler: Handler(handlerFunc: (_, params) => ResetPassword()));
-    router.define(displayImageView,
-        handler: Handler(handlerFunc: (_, params) => ShowImageDetailPage()));
-    router.define(setting,handler:Handler(
+    router.define(setting,
+        handler: Handler(handlerFunc: (_, params) => SettingPage()));
+    router.define(displayImageView,handler:Handler(
         handlerFunc: (
             BuildContext context, Map<String, List<String>> params) {
             var dataJson = params['key'].first;

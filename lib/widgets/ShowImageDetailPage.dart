@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:linker/model/HomeDataResp.dart';
 
-import '../routers/NavigatorUtils.dart';
+import 'package:linker/routers/NavigatorUtils.dart';
 
 class ShowImageDetailPage extends StatefulWidget {
   final HomeDataResp rsp;
@@ -24,6 +24,22 @@ class _ShowImageDetailPageState extends State<ShowImageDetailPage> {
           padding: EdgeInsets.only(left: 15, right: 15),
           child: Stack(
             children: <Widget>[
+              PageView.builder(
+                itemBuilder: (context, index) {
+                  return Container(
+                      child: Stack(children: <Widget>[
+                    Align(
+                      alignment: Alignment.center,
+                      child: Container(
+                          color: Colors.yellowAccent,
+                          child: Image.network(widget.rsp.imgs[index],
+                              fit: BoxFit.cover)),
+                    )
+                  ]));
+                },
+                itemCount: widget.rsp.imgs.length,
+              ),
+
               Align(
                 alignment: Alignment.topLeft,
                 child: GestureDetector(
@@ -48,21 +64,6 @@ class _ShowImageDetailPageState extends State<ShowImageDetailPage> {
                   ),
                 ),
               ),
-              PageView.builder(
-                itemBuilder: (context, index) {
-                  return Container(
-                      child: Stack(children: <Widget>[
-                    Align(
-                      alignment: Alignment.center,
-                      child: Container(
-                          color: Colors.yellowAccent,
-                          child: Image.network(widget.rsp.imgs[index],
-                              fit: BoxFit.cover)),
-                    )
-                  ]));
-                },
-                itemCount: widget.rsp.imgs.length,
-              )
             ],
           ),
         ),

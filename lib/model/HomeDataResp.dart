@@ -33,10 +33,11 @@ class HomeDataResp{
         like: json['like'] as int,
         comment: json['comment'] as int,
         repost: json['repost'] as int,
+        imgs: (json['imgs'] as List)?.map((e) => e as String)?.toList(),
         collect: json['collect'] as int);
   }
 
-  Map<String, dynamic> _$HomeDataRespToJson(HomeDataResp instance) =>
+  static Map<String, dynamic> HomeDataRespToJson(HomeDataResp instance) =>
       <String, dynamic>{
         'url': instance.url,
         'headUrl': instance.headUrl,
@@ -46,6 +47,7 @@ class HomeDataResp{
         'from': instance.from,
         'desc': instance.desc,
         'like': instance.like,
+        'imgs':instance.imgs,
         'comment': instance.comment,
         'repost': instance.repost,
         'collect': instance.collect

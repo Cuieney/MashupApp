@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_rounded_progress_bar/flutter_rounded_progress_bar.dart';
-import 'package:flutter_rounded_progress_bar/rounded_progress_bar_style.dart';
-import 'package:linker/widgets/WebViewPage.dart';
-import 'package:linker/widgets/ShowImageDetailPage.dart';
+import 'package:linker/widgets/progress/flutter_rounded_progress_bar.dart';
+import 'package:linker/widgets/progress/rounded_progress_bar_style.dart';
 
 import 'package:linker/model/HomeDataResp.dart';
 
 import '../routers/NavigatorUtils.dart';
+import '../routers/Routers.dart';
 
 
 class HomePage extends StatelessWidget {
@@ -270,7 +269,9 @@ class HomeItem extends StatelessWidget {
                                     height: 50,
                                     child: GestureDetector(
                                       onTap: () {
-                                       NavigatorUtils.goBackWithParams(context, homeData);
+                                        var map = Map<String,dynamic>();
+                                        map["key"] = homeData;
+                                       NavigatorUtils.pushWithParams(context,Routers.displayImageView,map);
                                       },
                                       child: Image.network(homeData.imgs[index],
                                           fit: BoxFit.cover),

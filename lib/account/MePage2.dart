@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'package:linker/home/HomePage2.dart';
 
+import '../routers/NavigatorUtils.dart';
+import '../routers/Routers.dart';
+
 class MePage2 extends StatelessWidget {
   const MePage2({Key key}) : super(key: key);
 
@@ -29,7 +32,9 @@ class MePage2 extends StatelessWidget {
                   Align(
                     alignment: Alignment.centerRight,
                     child: GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        NavigatorUtils.push(context, Routers.setting);
+                      },
                       child: Container(
                           margin: EdgeInsets.only(right: 20),
                           child: Icon(

@@ -1,9 +1,14 @@
+import 'dart:convert';
+
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 
 import 'package:linker/routers/FluroConvertUtils.dart';
 import 'package:linker/routers/Routers.dart';
 import 'package:linker/routers/Application.dart';
+
+import 'package:linker/model/HomeDataResp.dart';
+
 
 class NavigatorUtils {
 
@@ -29,7 +34,8 @@ class NavigatorUtils {
   static pushWithParams(BuildContext context, String path,Map<String, dynamic> model,
       {bool replace = false, bool clearStack = false}) {
     FocusScope.of(context).unfocus();
-    Application.router.navigateTo(context, "${path}?key=${FluroConvertUtils.object2string(model['key'])}", replace: replace, clearStack: clearStack, transition: TransitionType.native);
+    var data = model['key'] as HomeDataResp;
+    Application.router.navigateTo(context, "${path}?key=${FluroConvertUtils.object2string(HomeDataResp.HomeDataRespToJson(data))}", replace: replace, clearStack: clearStack, transition: TransitionType.native);
   }
 
 
