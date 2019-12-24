@@ -23,7 +23,7 @@ class NewHomePage extends StatelessWidget {
             Container(
               color: Colors.white,
               alignment: Alignment.center,
-              margin: EdgeInsets.only(top: 20),
+              padding: EdgeInsets.only(top: 20),
               height: 60,
               child: Text(
                 "Linker",

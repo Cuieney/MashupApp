@@ -1,9 +1,9 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 
-import 'FluroConvertUtils.dart';
-import 'Routers.dart';
-import 'application.dart';
+import 'package:linker/routers/FluroConvertUtils.dart';
+import 'package:linker/routers/Routers.dart';
+import 'package:linker/routers/Application.dart';
 
 class NavigatorUtils {
 

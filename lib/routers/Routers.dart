@@ -1,6 +1,7 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:linker/model/HomeDataResp.dart';
+import '../home/Splash.dart';
 import '../widgets/WebViewPage.dart';
 import '../login/Login.dart';
 import '../login/Register.dart';
@@ -24,7 +25,7 @@ class Routers {
     router.define(home,
         handler: Handler(handlerFunc: (_, params) => MainPage()));
     router.define(splash,
-        handler: Handler(handlerFunc: (_, params) => MainPage()));
+        handler: Handler(handlerFunc: (_, params) => Splash()));
     router.define(login,
         handler: Handler(handlerFunc: (_, params) => LoginPage()));
     router.define(register,

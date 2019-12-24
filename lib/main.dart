@@ -6,12 +6,6 @@ import 'package:linker/routers/Application.dart';
 import 'package:linker/routers/Routers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:linker/main/MainPage.dart';
-import 'package:linker/login/ResetPassword.dart';
-
-import 'package:linker/login/Login.dart';
-import 'package:linker/login/Register.dart';
-
 import 'home/Splash.dart';
 void main() {
   runApp(App());
@@ -48,6 +42,7 @@ class App extends StatelessWidget {
   }
 
   App(){
+    print("init");
     var router = Router();
     Routers.configureRoutes(router);
     Application.router = router;

@@ -40,9 +40,6 @@ var userPassword;
 class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    if (_onLogin2HomePage(context)) {
-      return null;
-    }
 
     return Scaffold(
         backgroundColor: Colors.white,
@@ -124,20 +121,6 @@ class LoginPage extends StatelessWidget {
     userName = name;
   }
 
-  bool _onLogin2HomePage(BuildContext context) {
-    bool status = false;
-    _prefs.then((SharedPreferences share) {
-      var token = share.get("token");
-      print("登录成功");
-      print(token);
-      if (token != null) {
-        status = true;
-        Navigator.pop(context);
-        Navigator.pushNamed(context, "home");
-      }
-    });
-    return status;
-  }
 
   _onPasswordInputTextChange(String password) {
     userPassword = password;
@@ -179,7 +162,6 @@ class LoginPage extends StatelessWidget {
       }
     }).catchError((error) {
       print("jsonResponse $error");
-      NavigatorUtils.push(context, Routers.home);
       _showToast(context, "登录失败 $error");
     });
   }
