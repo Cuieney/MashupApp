@@ -21,7 +21,7 @@ class HomeDataResp{
 
 
 
-  HomeDataResp _$HomeDataRespFromJson(Map<String, dynamic> json) {
+  factory HomeDataResp.homeDataRespFromJson(Map<String, dynamic> json) {
     return HomeDataResp(
         url: json['url'] as String,
         headUrl: json['headUrl'] as String,

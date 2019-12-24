@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.cuieney.news_app">
+    package="com.cuieney.linker">
 
     <!-- io.flutter.app.FlutterApplication is an android.app.Application that
          calls FlutterMain.startInitialization(this); in its onCreate method.
@@ -12,7 +12,7 @@
 
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="news_app"
+        android:label="linker"
         android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher">
         <activity

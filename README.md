@@ -1,4 +1,4 @@
-# news_app
+# linker
 
 A News App factory
 

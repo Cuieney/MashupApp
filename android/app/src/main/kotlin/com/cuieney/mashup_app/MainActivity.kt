@@ -1,4 +1,4 @@
-package com.cuieney.mashup_app
+package com.cuieney.linker
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity

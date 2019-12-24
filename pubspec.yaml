@@ -1,4 +1,4 @@
-name: news_app
+name: linker
 description: A News App factory
 
 # The following defines the version and build number for your application.
@@ -28,6 +28,8 @@ dependencies:
   shared_preferences: 0.4.3
   http: ^0.12.0+2
   flutter_rounded_progress_bar: 0.1.1
+  oktoast: ^2.3.0
+  fluro: "^1.5.1"
 
 
 dev_dependencies:

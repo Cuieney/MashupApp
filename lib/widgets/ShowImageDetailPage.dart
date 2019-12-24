@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:news_app/model/HomeDataResp.dart';
+import 'package:linker/model/HomeDataResp.dart';
+
+import '../routers/NavigatorUtils.dart';
 
 class ShowImageDetailPage extends StatefulWidget {
   final HomeDataResp rsp;
 
-  const ShowImageDetailPage({Key key,this.rsp}) : super(key: key);
+  const ShowImageDetailPage({Key key, this.rsp}) : super(key: key);
 
   @override
   _ShowImageDetailPageState createState() => _ShowImageDetailPageState();
@@ -25,7 +27,9 @@ class _ShowImageDetailPageState extends State<ShowImageDetailPage> {
               Align(
                 alignment: Alignment.topLeft,
                 child: GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    NavigatorUtils.goBack(context);
+                  },
                   child: Icon(
                     Icons.close,
                     color: Colors.white,
@@ -35,7 +39,9 @@ class _ShowImageDetailPageState extends State<ShowImageDetailPage> {
               Align(
                 alignment: Alignment.topRight,
                 child: GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    NavigatorUtils.goBack(context);
+                  },
                   child: Icon(
                     Icons.share,
                     color: Colors.white,

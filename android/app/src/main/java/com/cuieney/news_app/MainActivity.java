@@ -1,4 +1,4 @@
-package com.cuieney.news_app;
+package com.cuieney.linker;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;
