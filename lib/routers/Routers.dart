@@ -9,6 +9,8 @@ import 'package:linker/login/ResetPassword.dart';
 import 'package:linker/main/MainPage.dart';
 import 'package:linker/widgets/ShowImageDetailPage.dart';
 import 'package:linker/account/Setting.dart';
+import 'package:linker/account/ModifyUserHeader.dart';
+import 'package:linker/account/UserInfoPage.dart';
 import 'FluroConvertUtils.dart';
 
 class Routers {
@@ -21,6 +23,8 @@ class Routers {
   static String displayImageView = "/displayImageView";
   static String setting = "/setting";
   static String webViewPage = "/webViewPage";
+  static String modifyUserHead = "/modifyUserHead";
+  static String userInfoPage = "/userInfoPage";
 
   static void configureRoutes(Router router) {
     router.define(home,
@@ -35,6 +39,10 @@ class Routers {
         handler: Handler(handlerFunc: (_, params) => ResetPassword()));
     router.define(setting,
         handler: Handler(handlerFunc: (_, params) => SettingPage()));
+    router.define(modifyUserHead,
+        handler: Handler(handlerFunc: (_, params) => ModifyUserHeader()));
+    router.define(userInfoPage,
+        handler: Handler(handlerFunc: (_, params) => UserInfoPage()));
     router.define(displayImageView,handler:Handler(
         handlerFunc: (
             BuildContext context, Map<String, List<String>> params) {

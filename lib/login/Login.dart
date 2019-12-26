@@ -154,8 +154,7 @@ class LoginPage extends StatelessWidget {
         _showToast(context, "登录成功");
         _prefs.then((SharedPreferences preferences) {
           preferences.setString("token", jsonResponse['token']);
-          NavigatorUtils.goBack(context);
-          NavigatorUtils.push(context, Routers.home);
+          NavigatorUtils.push(context, Routers.home,replace: true);
         }).catchError((error){print(error);});
       } else {
         _showToast(context, "登录失败 ${jsonResponse['msg']}");

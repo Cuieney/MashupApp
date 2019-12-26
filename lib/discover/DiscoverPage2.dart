@@ -5,6 +5,8 @@ import 'package:linker/http/HttpConstant.dart';
 import 'package:linker/http/HttpRequest.dart';
 import 'package:linker/model/DiscoverModel.dart';
 
+import 'package:linker/widgets/CustomImageView.dart';
+
 
 void main() {
   runApp(MaterialApp(
@@ -25,22 +27,18 @@ class _DiscoverListState extends State<DiscoverList> {
   Widget build(BuildContext context) {
     return new Scaffold(
         body: Container(
+          margin: EdgeInsets.only(top: 30),
       child: Column(
         children: <Widget>[
           Container(
-            height: 30,
-          ),
-          Container(
             color: Color(0x224A90E2),
             margin: EdgeInsets.all(10),
-            
             child: Center(
               child: TextField(
                 textAlign: TextAlign.left,
-              maxLines: 1,
+                maxLines: 1,
               keyboardType: TextInputType.text,
               decoration: InputDecoration(
-
                 filled: true,
                 border: InputBorder.none,
                 prefixIcon: Icon(
@@ -125,11 +123,17 @@ class TypeList extends StatelessWidget {
       margin: EdgeInsets.all(10),
       child: Row(
         children: <Widget>[
-          Container(
-              child: ClipRRect(
-                  borderRadius: BorderRadius.circular(5),
-                  child: Image.network(discoverDataResp.image_url,
-                      width: 30, height: 30))),
+
+          ClipRRect(
+              child: CustomImageView(
+                width: 30,
+                height: 30,
+                fit: BoxFit.cover,
+                url: discoverDataResp.image_url,
+              ),
+            borderRadius: BorderRadius.circular(5),
+          ),
+
           Container(
             margin: EdgeInsets.only(left: 5),
             child: Text("${discoverDataResp.title}"),

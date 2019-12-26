@@ -6,7 +6,7 @@ import 'package:linker/model/HomeDataResp.dart';
 
 import '../routers/NavigatorUtils.dart';
 import '../routers/Routers.dart';
-
+import '../widgets/CustomImageView.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -157,7 +157,8 @@ class HomeItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        NavigatorUtils.goWebViewPage(context,"Flutter 中文社区","https://flutter-io.cn/");
+        NavigatorUtils.goWebViewPage(
+            context, "Flutter 中文社区", "https://flutter-io.cn/");
       },
       child: Container(
         child: Column(
@@ -171,14 +172,15 @@ class HomeItem extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
-                          Container(
-                            width: 35,
-                            height: 35,
-                            decoration: BoxDecoration(
-                                image: DecorationImage(
-                                    image: NetworkImage(homeData.headUrl),
-                                    fit: BoxFit.cover),
-                                borderRadius: BorderRadius.circular(2)),
+                          ClipRRect(
+                            child: CustomImageView(
+                              width: 35,
+                              height: 35,
+                              fit: BoxFit.cover,
+                              url: homeData.headUrl,
+                            ),
+                              borderRadius: BorderRadius.all(Radius.circular(2)
+                              ),
                           ),
                           Expanded(
                               child: Container(
@@ -263,19 +265,20 @@ class HomeItem extends StatelessWidget {
                                       crossAxisSpacing: 2,
                                       childAspectRatio: 1),
                               itemBuilder: (BuildContext context, int index) {
-                                return Container(
-                                    color: Colors.yellowAccent,
+                                return GestureDetector(
+                                  onTap: () {
+                                    var map = Map<String, dynamic>();
+                                    map["key"] = homeData;
+                                    NavigatorUtils.pushWithParams(context,
+                                        Routers.displayImageView, map);
+                                  },
+                                  child: CustomImageView(
                                     width: 50,
                                     height: 50,
-                                    child: GestureDetector(
-                                      onTap: () {
-                                        var map = Map<String,dynamic>();
-                                        map["key"] = homeData;
-                                       NavigatorUtils.pushWithParams(context,Routers.displayImageView,map);
-                                      },
-                                      child: Image.network(homeData.imgs[index],
-                                          fit: BoxFit.cover),
-                                    ));
+                                    fit: BoxFit.cover,
+                                    url: homeData.imgs[index],
+                                  ),
+                                );
                               },
                               itemCount: homeData.imgs.length,
                             ),
@@ -284,17 +287,20 @@ class HomeItem extends StatelessWidget {
                     Stack(
                       alignment: Alignment.centerLeft,
                       children: <Widget>[
-                        Container(
+
+
+                        ClipRRect(
+                          child: CustomImageView(
                             width: 35,
                             height: 35,
-                            decoration: BoxDecoration(
-                                image: DecorationImage(
-                                    image: NetworkImage(
-                                        "https://upload-images.jianshu.io/upload_images/5440469-51c9d22950008274.png?imageMogr2/auto-orient/strip|imageView2/2/w/564/format/webp"),
-                                    fit: BoxFit.cover),
-                                borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(2),
-                                    bottomLeft: Radius.circular(2)))),
+                            fit: BoxFit.cover,
+                            url: homeData.headUrl,
+                          ),
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(2),
+                              bottomLeft: Radius.circular(2))
+                        ),
+
                         Container(
                           alignment: Alignment.centerLeft,
                           margin: EdgeInsets.only(left: 40),
