@@ -11,6 +11,7 @@ import 'package:linker/widgets/ShowImageDetailPage.dart';
 import 'package:linker/account/Setting.dart';
 import 'package:linker/account/ModifyUserHeader.dart';
 import 'package:linker/account/UserInfoPage.dart';
+import 'package:linker/account/ModifyUserInfo.dart';
 import 'FluroConvertUtils.dart';
 
 class Routers {
@@ -25,6 +26,7 @@ class Routers {
   static String webViewPage = "/webViewPage";
   static String modifyUserHead = "/modifyUserHead";
   static String userInfoPage = "/userInfoPage";
+  static String modifyUserInfo = "/modifyUserInfo";
 
   static void configureRoutes(Router router) {
     router.define(home,
@@ -41,6 +43,12 @@ class Routers {
         handler: Handler(handlerFunc: (_, params) => SettingPage()));
     router.define(modifyUserHead,
         handler: Handler(handlerFunc: (_, params) => ModifyUserHeader()));
+    router.define(modifyUserInfo,
+        handler: Handler(handlerFunc: (BuildContext context,Map<String, List<dynamic>> params){
+          var title = FluroConvertUtils.fluroCnParamsDecode(params['title'].first);
+          var isModifyUserName = params['isModifyUserName'].first;
+          return ModifyUserInfo(title: title,isModifyUserName: isModifyUserName.toLowerCase() == 'true');
+        }));
     router.define(userInfoPage,
         handler: Handler(handlerFunc: (_, params) => UserInfoPage()));
     router.define(displayImageView,handler:Handler(

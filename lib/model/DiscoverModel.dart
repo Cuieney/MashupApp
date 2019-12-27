@@ -1,6 +1,4 @@
-import 'package:json_annotation/json_annotation.dart';
 
-@JsonSerializable()
 class DiscoverModel {
   String title;
   int id;

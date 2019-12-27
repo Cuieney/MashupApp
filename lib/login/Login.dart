@@ -5,34 +5,34 @@ import 'package:flutter/services.dart';
 import 'package:linker/main/MainPage.dart';
 import 'package:linker/login/ResetPassword.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../routers/NavigatorUtils.dart';
-import '../routers/Routers.dart';
+import 'package:linker/routers/NavigatorUtils.dart';
+import 'package:linker/routers/Routers.dart';
 import 'Register.dart';
 import 'package:linker/http/HttpConstant.dart';
 import 'package:linker/http/HttpRequest.dart';
 
 Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
-void main() {
-  runApp(MaterialApp(
-    home: LoginPage(),
-    color: Colors.white,
-    routes: {
-      "register": (context) => RegisterPage(),
-      "reset": (context) => ResetPassword(),
-      "home": (context) => MainPage(),
-    },
-  ));
+// void main() {
+//   runApp(MaterialApp(
+//     home: LoginPage(),
+//     color: Colors.white,
+//     routes: {
+//       "register": (context) => RegisterPage(),
+//       "reset": (context) => ResetPassword(),
+//       "home": (context) => MainPage(),
+//     },
+//   ));
 
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    systemNavigationBarColor: Color(0xFF000000),
-    systemNavigationBarDividerColor: null,
-    systemNavigationBarIconBrightness: Brightness.light,
-    statusBarIconBrightness: Brightness.dark,
-    statusBarBrightness: Brightness.light,
-    statusBarColor: Colors.white, // status bar color
-  ));
-}
+//   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+//     systemNavigationBarColor: Color(0xFF000000),
+//     systemNavigationBarDividerColor: null,
+//     systemNavigationBarIconBrightness: Brightness.light,
+//     statusBarIconBrightness: Brightness.dark,
+//     statusBarBrightness: Brightness.light,
+//     statusBarColor: Colors.white, // status bar color
+//   ));
+// }
 
 var userName;
 var userPassword;
@@ -107,6 +107,7 @@ class LoginPage extends StatelessWidget {
                         style: TextStyle(color: Colors.white),
                       ),
                       onPressed: () => _onLogin(context),
+                      onLongPress: ()=> NavigatorUtils.push(context, Routers.home,replace: true),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(50)),
                       splashColor: Color(0xFF02AF8A),

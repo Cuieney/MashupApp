@@ -10,7 +10,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:linker/routers/FluroConvertUtils.dart';
 
 import 'package:linker/widgets/CustomImageView.dart';
+import 'package:flutter/foundation.dart';
 
+bool isWeb = (defaultTargetPlatform == TargetPlatform.iOS ||
+    defaultTargetPlatform == TargetPlatform.android);
 
 Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
@@ -20,7 +23,7 @@ class MePage2 extends StatefulWidget {
 }
 
 class _MePage2State extends State<MePage2> with WidgetsBindingObserver {
-  UserInfo userInfo = new UserInfo();
+  UserInfo userInfo = new UserInfo(head_img: "",user_name: "",user_signature: "");
 
   @override
   void initState() {
@@ -64,7 +67,7 @@ class _MePage2State extends State<MePage2> with WidgetsBindingObserver {
       if (userInfoJson == null || userInfoJson.length <= 0) {
         userInfo = UserInfo(
             head_img:
-                "https://upload-images.jianshu.io/upload_images/3301720-db890fabf626e0ac.jpg?imageMogr2/auto-orient/strip|imageView2/2/w/1200/format/webp",
+                "assets/header.jpg",
             user_name: "Linda",
             user_signature: "梦想不足以让你到达远方，但是到达远方的人一定有梦想");
         share.setString('user_info', FluroConvertUtils.object2string(UserInfo.userInfo2Json(userInfo)));
@@ -90,7 +93,7 @@ class _MePage2State extends State<MePage2> with WidgetsBindingObserver {
           Container(
               color: Colors.white,
               alignment: Alignment.center,
-              padding: EdgeInsets.only(top: 45, bottom: 15),
+              padding: EdgeInsets.only(top: isWeb?20:45, bottom: 15),
               child: Stack(
                 children: <Widget>[
                   Align(
@@ -131,7 +134,7 @@ class _MePage2State extends State<MePage2> with WidgetsBindingObserver {
               children: <Widget>[
                 ClipOval(
                     child: CustomImageView(url: userInfo.head_img, width: 50.0,
-                      height: 50.0,fit: BoxFit.cover,)),
+                      height: 50.0,fit: BoxFit.fill,)),
                 Container(
                   margin: EdgeInsets.only(top: 10),
                   child: Text(

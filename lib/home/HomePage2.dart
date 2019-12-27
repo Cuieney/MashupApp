@@ -9,22 +9,26 @@ import 'package:linker/model/HomeDataResp.dart';
 //    home: NewHomePage(),
 //  ));
 //}
+import 'package:flutter/foundation.dart';
 
+bool isWeb = (defaultTargetPlatform == TargetPlatform.iOS ||
+    defaultTargetPlatform == TargetPlatform.android);
 class NewHomePage extends StatelessWidget {
   const NewHomePage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Container(
+        margin: EdgeInsets.only(top: isWeb?20:45),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             Container(
               color: Colors.white,
               alignment: Alignment.center,
-              padding: EdgeInsets.only(top: 45),
-              height: 85,
+
               child: Text(
                 "Linker",
                 style: TextStyle(
@@ -85,11 +89,23 @@ class _DataListState extends State<DataListContainer> {
       List<String> imgs = [];
       if (i == 1) {
         for (int j = 0; j < 9; j++) {
-          if (j == 2 || j == 5) {
+          if (j == 0) {
             imgs.add("https://static.cnodejs.org/FhbRjHzt02UssAWL7pa4b6rOvh78");
+          } else if (j == 2) {
+            imgs.add(
+                "https://f.sinaimg.cn/tech/transform/539/w219h320/20191226/e091-imfiehq3800840.gif");
+          } else if (j == 3) {
+            imgs.add(
+                "https://n.sinaimg.cn/tech/transform/457/w292h165/20191226/9c33-imfiehq3825223.gif");
+          } else if (j == 6) {
+            imgs.add(
+                "https://n.sinaimg.cn/tech/transform/312/w200h112/20191226/f489-imfiehq3795843.gif");
+          } else if (j == 4) {
+            imgs.add(
+                "https://n.sinaimg.cn/tech/transform/608/w274h334/20191226/deef-imfiehq3821290.gif");
           } else {
             imgs.add(
-                "https://upload-images.jianshu.io/upload_images/5440469-51c9d22950008274.png?imageMogr2/auto-orient/strip|imageView2/2/w/564/format/webp");
+                "https://ss1.baidu.com/-4o3dSag_xI4khGko9WTAnF6hhy/image/h%3D300/sign=907f6e689ddda144c5096ab282b6d009/dc54564e9258d1092f7663c9db58ccbf6c814d30.jpg");
           }
         }
       }

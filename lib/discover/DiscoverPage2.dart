@@ -1,4 +1,6 @@
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 
 import 'package:linker/http/HttpConstant.dart';
@@ -7,14 +9,10 @@ import 'package:linker/model/DiscoverModel.dart';
 
 import 'package:linker/widgets/CustomImageView.dart';
 
+import 'package:flutter/foundation.dart';
 
-void main() {
-  runApp(MaterialApp(
-    color: Color(0xFFF1F1F1),
-    home: DiscoverList(),
-  ));
-}
-
+bool isWeb = (defaultTargetPlatform == TargetPlatform.iOS ||
+    defaultTargetPlatform == TargetPlatform.android);
 class DiscoverList extends StatefulWidget {
   @override
   _DiscoverListState createState() => _DiscoverListState();
@@ -27,7 +25,7 @@ class _DiscoverListState extends State<DiscoverList> {
   Widget build(BuildContext context) {
     return new Scaffold(
         body: Container(
-          margin: EdgeInsets.only(top: 30),
+          margin: EdgeInsets.only(top: isWeb?10:45),
       child: Column(
         children: <Widget>[
           Container(
@@ -102,13 +100,33 @@ class _DiscoverListState extends State<DiscoverList> {
         data.image_url = i['image_url'];
         return data;
       }).toList();
+
+      setState(() {
+        dataList.addAll(list);
+      });
+
     }).catchError((error) {
-      print(error);
+      Future<String> json = DefaultAssetBundle.of(context).loadString("assets/discover.json");
+      json.then((value){
+        var response = jsonDecode(value);
+        var listData = response['data'] as List;
+        list = listData.map((dynamic i) {
+          var data = new DiscoverModel();
+          data.title = i['title'];
+          data.id = i['id'];
+          data.image_url = i['image_url'];
+          return data;
+        }).toList();
+
+        setState(() {
+          dataList.addAll(list);
+        });
+
+      }).catchError((error)=>print("error ${error}"));
+      print("ssssss $error}");
     });
 
-    setState(() {
-      dataList.addAll(list);
-    });
+
   }
 }
 

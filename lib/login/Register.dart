@@ -8,10 +8,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:linker/http/HttpConstant.dart';
 import 'package:linker/http/HttpRequest.dart';
 
-void main() {
-  runApp(MaterialApp(color: Colors.white, home: RegisterPage()));
-}
-
 Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 String userName;
 String userEmail;

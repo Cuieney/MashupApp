@@ -50,7 +50,7 @@ class _MainPageState extends State<MainPage> {
         items: [
           new BottomNavigationBarItem(
               icon: Image.asset(
-                'images/home.png',
+                'assets/images/home.png',
                 width: 20,
                 height: 20,
               ),
@@ -61,13 +61,13 @@ class _MainPageState extends State<MainPage> {
                     : TextStyle(color: Color(0xFF4E4E4E), fontSize: 0),
               ),
               activeIcon: Image.asset(
-                'images/home_press.png',
+                'assets/images/home_press.png',
                 width: 20,
                 height: 20,
               )),
           new BottomNavigationBarItem(
               icon: Image.asset(
-                'images/discover.png',
+                'assets/images/discover.png',
                 width: 20,
                 height: 20,
               ),
@@ -78,13 +78,13 @@ class _MainPageState extends State<MainPage> {
                     : TextStyle(color: Color(0xFF4E4E4E), fontSize: 0),
               ),
               activeIcon: Image.asset(
-                'images/discover_press.png',
+                'assets/images/discover_press.png',
                 width: 20,
                 height: 20,
               )),
           new BottomNavigationBarItem(
               icon: Image.asset(
-                'images/me.png',
+                'assets/images/me.png',
                 width: 20,
                 height: 20,
               ),
@@ -95,7 +95,7 @@ class _MainPageState extends State<MainPage> {
                     : TextStyle(color: Color(0xFF4E4E4E), fontSize: 0),
               ),
               activeIcon: Image.asset(
-                'images/me_press.png',
+                'assets/images/me_press.png',
                 width: 20,
                 height: 20,
               ))

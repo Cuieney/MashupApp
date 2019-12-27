@@ -4,10 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:linker/widgets/BackIcon.dart';
 import 'package:linker/widgets/CountDownTextRoute.dart';
 
-void main() {
-  runApp(MaterialApp(color: Colors.white, home: ResetPassword()));
-}
-
 class ResetPassword extends StatelessWidget {
   var phoneNumber;
   var userPassword;

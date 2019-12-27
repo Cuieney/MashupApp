@@ -1,7 +1,4 @@
 
-import 'package:json_annotation/json_annotation.dart';
-
-@JsonSerializable()
 class HomeDataResp{
   String url;
   String headUrl;

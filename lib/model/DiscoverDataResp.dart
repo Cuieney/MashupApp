@@ -1,7 +1,5 @@
 
-import 'package:json_annotation/json_annotation.dart';
 
-@JsonSerializable()
 class DiscoverDataResp{
   String type;
   List<DiscoverItem> list;
@@ -10,7 +8,6 @@ class DiscoverDataResp{
 
 }
 
-@JsonSerializable()
 class DiscoverItem{
   String url;
   String desc;

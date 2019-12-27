@@ -25,7 +25,6 @@ void main() {
 //    ));
 
 //  }
-
   if (Platform.isAndroid) {
     SystemUiOverlayStyle systemUiOverlayStyle =
     SystemUiOverlayStyle(statusBarColor: Colors.transparent,statusBarIconBrightness: Brightness.dark);
@@ -43,7 +42,6 @@ class App extends StatelessWidget {
   }
 
   App(){
-    print("init");
     var router = Router();
     Routers.configureRoutes(router);
     Application.router = router;

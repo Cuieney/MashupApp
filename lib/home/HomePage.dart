@@ -4,9 +4,10 @@ import 'package:linker/widgets/progress/rounded_progress_bar_style.dart';
 
 import 'package:linker/model/HomeDataResp.dart';
 
-import '../routers/NavigatorUtils.dart';
-import '../routers/Routers.dart';
-import '../widgets/CustomImageView.dart';
+import 'package:linker/routers/FluroConvertUtils.dart';
+import 'package:linker/routers/NavigatorUtils.dart';
+import 'package:linker/routers/Routers.dart';
+import 'package:linker/widgets/CustomImageView.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -131,9 +132,15 @@ class _HomeListState extends State<HomeList> {
           if (j == 2) {
             imgs.add(
                 "https://upfile.asqql.com/2009pasdfasdfic2009s305985-ts/2019-6/20196921481957978.gif");
-          } else {
+          } else if(j == 3){
             imgs.add(
-                "https://upload-images.jianshu.io/upload_images/5440469-51c9d22950008274.png?imageMogr2/auto-orient/strip|imageView2/2/w/564/format/webp");
+                "https://n.sinaimg.cn/tech/transform/457/w292h165/20191226/9c33-imfiehq3825223.gif");
+          }else if(j == 4){
+            imgs.add(
+                "https://n.sinaimg.cn/tech/transform/608/w274h334/20191226/deef-imfiehq3821290.gif");
+          }else {
+            imgs.add(
+                "https://ss1.baidu.com/-4o3dSag_xI4khGko9WTAnF6hhy/image/h%3D300/sign=907f6e689ddda144c5096ab282b6d009/dc54564e9258d1092f7663c9db58ccbf6c814d30.jpg");
           }
         }
       }
@@ -267,8 +274,8 @@ class HomeItem extends StatelessWidget {
                               itemBuilder: (BuildContext context, int index) {
                                 return GestureDetector(
                                   onTap: () {
-                                    var map = Map<String, dynamic>();
-                                    map["key"] = homeData;
+                                    var map = Map<String,dynamic>();
+                                    map['key'] = FluroConvertUtils.object2string(HomeDataResp.HomeDataRespToJson(homeData));
                                     NavigatorUtils.pushWithParams(context,
                                         Routers.displayImageView, map);
                                   },

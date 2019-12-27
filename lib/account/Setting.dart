@@ -54,7 +54,7 @@ class SettingPage extends StatelessWidget {
               color: Colors.white,
               padding: EdgeInsets.only(left: 20, right: 15),
               alignment: Alignment.centerLeft,
-              child: GestureDetector(
+              child: InkWell(
                 onTap: (){
                   NavigatorUtils.push(context, Routers.userInfoPage);
                 },
